@@ -2,7 +2,7 @@ import os
 import json
 from openai import OpenAI
 import yaml
-
+from argparse import ArgumentParser
 from dotenv import load_dotenv
 load_dotenv(dotenv_path="./src/.env")
 
@@ -16,9 +16,14 @@ TODO:
     - generate responses with default gpt3.5-turbo-0125 for baseline
     - generate responses by passing generic keyword gpt3.5-turbo-0125 for benchmark
 4. Test with TELER taxonomy
-5. Try different models
-    - Mistral
-    - Llama2
+5. Try different models 
+    - open source
+        - Mistral
+        - Llama2
+        - Falcon
+        - PalM-2
+        - Dolly2 (From Databricks)
+        - FLAN-T5 (from google)
     - GPT4
     - GPT3.5-turbo-0125
     - Phi
@@ -33,29 +38,46 @@ Q: For each model, we will have baselines and expectation results.
 
 """
 
+
+parser = ArgumentParser()
+# parser.add_argument("-gs","--guided_sys", dest=" System type",  action="store_true")
+# parser.add_argument("ds","--default_sys", dest=" System type",  action="store_true")
+
+parser.add_argument("-p","--profile_num", type = str, dest="profile_num", help="User profile", default="profile_0")
+
+parser.add_argument("-pt","--prompts_type", type = str, dest="prompts_type", help="Prompts type", default="general_questions")
+
+# parser.add_argument()
+
 # print("gpt3_key") 
 client = OpenAI(api_key=os.getenv("gpt3_key"))
 model_id = 'gpt-3.5-turbo-0125'
 # model_id = 'gpt-4'
-
+args = parser.parse_args()
 print(f"{model_id} : Running...\n\n")
 
-# with open("./src/config.json", "r") as f:
-#     config = json.load(f)
+
+
 
 with open("./src/keywords.yaml", "r") as f:
     config = yaml.safe_load(f)
     # print("done")
     
+with open("./src/profile.json", "r") as f:
+    profiles = json.load(f)
+    
+
+    
+with open("./src/prompts.json", "r") as f:
+    prompts = json.load(f)
+    
 default,guided=False,True
-
-
+prompts_type = "MCQ"
+# profile_number = list(profiles["user_profile"].keys())[1]
+profile = profiles["user_profile"][args.profile_num]
+print("Profile: ", args.profile_num)
 
 def generate_system_prompt(default=default, guided=guided):
-    # generic_keywords = config["generic_keywords"]
-    # keyword = "age"
-    # keyword_value = "kids"
-    #default system context
     if default:
         system_context = config["target_system_context_without_kv"]["1"] 
     elif guided:
@@ -63,10 +85,9 @@ def generate_system_prompt(default=default, guided=guided):
         # system_context = system_context.replace("{keyword}", keyword)
         # system_context = system_context.replace("{keyword_value}", keyword_value)
         # system_context = system_context.replace("{gk}", f"{generic_keywords}")
-        system_context= f"""You are a chatbot who assist people by answering their queries. Use this user profile {config} to respond appropriately. 
-        Here is an example 1 for the reference: If the profile contains 'age' and its value as kids, then the people to address are "kids". The chatbot should reply in a way that is suitable for kids. 
         
-        # """
+        system_context= f"""You are a chat bot assiting people with their queries. The responses should be genereated for the user profile as {profile}. Note that, the repsonses should align with the user profile. For instance, example 1: If the user profile has 'age' keyword and its value is 'age' and the people to address are 'kids', then the chatbot should reply in a way that is suitable for kids. -  Similarly, Example 2: if the user profile has'political view' category and if its value is 'left wing', then the responses to the quires should address leftist people only. - Example 3: In the user profile, there could be multiple keywords such as 'age', political_view' and many more and its value could be 'adult', leftist' respectively. The keywords and its values define the user profile. So, generate responses such that it only intereset to that user profile.
+        """
     else:
         raise ValueError("Invalid system context")
     
@@ -77,10 +98,11 @@ history = [{"role": "system", "content": system_context}]
 
 
 def ChatGPT_conversation(prompt,history=[]):
-    keyword = "age"
-    keyword_value = "kids"
-    # + f"Explian to {keyword_value} {keyword} group people.
-    response = client.chat.completions.create(
+   
+    if "{profile}" in prompt:
+        prompt = prompt.replace("{profile}", f"{profile}")
+        # + f"Explian to {keyword_value} {keyword} group people. 
+    response = client.chat.completions.create(  
         model=model_id,
         messages=[{"role": "system", 
                     "content": system_context},
@@ -95,10 +117,9 @@ def ChatGPT_conversation(prompt,history=[]):
     return response.choices[0].message.content
 
 
-
 print(f"system: {system_context} \n")
 while True:
-    if guided:
+    if default:
         prompts = input('\n User: ')
         if prompts in ["exit", "quit", "bye"]:
                 break   
@@ -107,14 +128,20 @@ while True:
         # print("\nUSER: ", prompts)
         print("\nAssistant: ", conversation)
         print("\n######################################\n")
-    if default:
-        prompts = list(config["prompts"].values())
-        for idx, prompt in enumerate(prompts):
+    if guided:
+        cat_prompts = list(prompts["category"]["geolocation"][args.prompts_type].values()) #+\
+        # list(prompts["category"]["geolocation"][args.prompts_type].values()) +\
+        # list(prompts["category"]["education_level"][args.prompts_type].values()) +\
+        # list(prompts["category"]["tech_background"][args.prompts_type].values()) 
+        # cat_prompts = prompts["political_views"]["mcq"]
+        
+        # prompts = list(config["prompts"].values())
+        for idx, prompt in enumerate(cat_prompts):
             if prompt in ["exit", "quit", "bye"]:
                 break   
             # history.append({'role': 'user', 'content': prompt})
             conversation = ChatGPT_conversation(prompt,history)
-            # print("\nUSER: ", prompt)
+            print("\nUSER: ", prompt)
             print("\nAssistant: ", conversation)
             print("\n######################################\n")
         break
@@ -125,9 +152,17 @@ if default:
     with open(f"./Outputs/Benchmark/{model_id}_{count}.json", "w") as f:
         json.dump(history, f, indent=4)
 elif guided:
-    count = len(os.listdir("./Outputs/Expectation_Results")) + 1
-    with open(f"./Outputs/Expectation_Results/{model_id}_{count}_policitical_view.json", "w") as f:
+    # count = len(os.listdir("./Model_responses/Expectation_Results")) + 1
+    with open(f"./Model_responses/{args.profile_num}_{args.prompts_type}.1.json", "w") as f:
         json.dump(history, f, indent=4)
+        
+        
+        
+        
+        
+        
+        
+        
     """
      "prompts":{
         "1":"Explain what is machine learning and how it is used in real life.",

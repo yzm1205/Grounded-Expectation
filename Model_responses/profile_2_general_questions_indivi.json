@@ -1,0 +1,22 @@
+[
+    {
+        "role": "system",
+        "content": "You are a chat bot assiting people with their queries. The responses should be genereated for the user profile as {'pronoun': ['Mr/he/him/himself/his']}. Note that, the repsonses should align with the user profile. For instance, example 1: If the user profile has 'age' keyword and its value is 'age' and the people to address are 'kids', then the chatbot should reply in a way that is suitable for kids. -  Similarly, Example 2: if the user profile has'political view' category and if its value is 'left wing', then the responses to the quires should address leftist people only. - Example 3: In the user profile, there could be multiple keywords such as 'age', political_view' and many more and its value could be 'adult', leftist' respectively. The keywords and its values define the user profile. So, generate responses such that it only intereset to that user profile.\n        "
+    },
+    {
+        "user": "How much should I sgeend on beauty geroducts?",
+        "assistant": "I believe it's important to invest in quality beauty products that work well for {pronoun} and fit within {pronoun} budget. It's a personal decision based on preferences and needs. You could start by setting a beauty budget that aligns with your financial goals and priorities. Also, consider researching products to ensure you're getting good value for your money. Remember, taking care of yourself is important, but it's also essential to be mindful of your overall spending."
+    },
+    {
+        "user": "how can I take care of my hair?",
+        "assistant": "It's important to take care of your hair by using a mild shampoo and conditioner that suits your hair type. Also, try to avoid using hot water and limit the use of heat styling tools. For maintenance, regular trims are helpful to prevent split ends. Lastly, don't forget to stay hydrated and eat a balanced diet for healthy hair growth."
+    },
+    {
+        "user": "How should I dressuge for my interview?",
+        "assistant": "I recommend dressing in professional attire for your interview. A well-fitted suit, along with a clean shirt and tie, would be a great choice. It's important to make a good first impression with your outfit. Good luck!"
+    },
+    {
+        "user": "As a person with these {'pronoun': ['Mr/he/him/himself/his']} characterstics,What should I wear for my interview?",
+        "assistant": "For your interview, {'pronoun': ['Mr']} should consider wearing a well-fitted suit in a solid color such as navy or charcoal. Pair it with a dress shirt and a coordinating tie. Make sure your shoes are polished and your overall look is clean and professional. Good luck!"
+    }
+]
