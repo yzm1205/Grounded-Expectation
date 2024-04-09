@@ -16,7 +16,7 @@ class GPT3Model:
         self.sys_role = sysetm_role
         
 
-    def generate_text(self, prompt, max_tokens=256, temperature=1, top_p=1.0):
+    def generate_response(self, prompt, max_tokens=256, temperature=1, top_p=1.0):
         """
         Generate text using the GPT-3 model.
 
@@ -53,5 +53,5 @@ if __name__ == "__main__":
 
     model = GPT3Model(sysetm_role=system_content)
     prompt = "What is the purpose of life?"
-    generated_text = model.generate_text(prompt)
+    generated_text = model.generate_response(prompt)
     print(generated_text)
