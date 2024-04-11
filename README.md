@@ -1,4 +1,12 @@
 # Grounded-Expectation
+## - Domain Expert: 
+Dictate the *guideliness* for the chatbot. A chatbot must follow the guideliness and assist **Target Users**.
+ - **Automate Prompt Engineering (APE)**:\
+ Customizing prompts for specific tasks to amplify the efficiency of interactions with LLMs.
+
+## - Target Users:
+Can have a very personailzed conversation with a chatbot. The customized personliazation is done by identifying user profile/background. 
+    
 
 # [Model Descriptions](https://www.listendata.com/2023/03/open-source-chatgpt-models-step-by-step.html#llama_2)
 - Helper links: 
