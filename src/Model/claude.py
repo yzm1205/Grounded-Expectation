@@ -9,9 +9,10 @@ class ClaudeModel:
 
     def __init__(self, system_role, model="claude-3-opus-20240229"):
       
-        self.client = anthropic.Anthropic(api_key=os.getenv("claude"))
+        self.client = anthropic.Anthropic(api_key=os.getenv("claude_key"))
         self.model = model
         self.sys_role = system_role
+        print(f"\n {model} \n")
 
     def generate_response(self, prompt, max_tokens=1000, temperature=1):
         """

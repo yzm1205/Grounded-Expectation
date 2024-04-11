@@ -9,11 +9,13 @@ load_dotenv(dotenv_path="./src/.env")
 
 class GPT3Model:
     
-    def __init__(self,sysetm_role,model_name='gpt-3.5-turbo-0125'):
+    def __init__(self,system_role,model_name='gpt-3.5-turbo-0125'):
     
         self.client = OpenAI(api_key=os.getenv("gpt3_key"))
         self.model_name = model_name
-        self.sys_role = sysetm_role
+        self.sys_role = system_role
+        print(model_name)
+        print()
         
 
     def generate_response(self, prompt, max_tokens=256, temperature=1, top_p=1.0):
