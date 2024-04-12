@@ -21,8 +21,15 @@ echo "Running Script"
 
 for ((i = 0; i < 20; i++)); do
     echo "Processing : Profile_$i"
-    python src/run.py  -p $i -pt general_questions -m gpt3 || true
-    python src/run.py  -p $i -pt general_questions -m claude || true
-    python src/run.py  -p $i -pt general_questions -m gemini || true
+
+    # python src/run.py  -p $i -pt general_questions -m claude || true
+    
+    echo "Level 2 prompting \n"
+    python src/run.py  -p $i -pt general_questions -m gpt3 -lv 2 || true
+    python src/run.py  -p $i -pt general_questions -m gemini -lv 2|| true
+
+    echo "Level 3 prompting \n"
+    python src/run.py  -p $i -pt general_questions -m gpt3 -lv 3 || true
+    python src/run.py  -p $i -pt general_questions -m gemini -lv 3|| true
 
 done

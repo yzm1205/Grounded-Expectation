@@ -14,8 +14,9 @@ parser.add_argument("-pt",dest="prompt_type", type = str, help="Select one promp
 
 parser.add_argument("-m",dest="model_name", type = str, help="Model selection", default="gpt3")
 
+parser.add_argument("-lv",dest="lv", type = str, help="Provide TELer Prompt Level. Select from lv0, lv1, lv2, lv3, lv4", default="lv4")
 
-# TODO: Set argument to select model
+
 
 # get system content
 with open("./config/system_prompt.yaml", "r") as f:
@@ -31,7 +32,11 @@ with open("./config/prompts.json", "r") as f:
 
 args = parser.parse_args()
 profile = user_profile["user_profile"][f"profile_{args.profile_num}"]
-system_content= system_content["target_system_content"]["lv4"].format(profile=json.dumps(profile))
+
+if args.lv in ["lv0", "lv1"]:
+    system_content= system_content["target_system_content"][f"lv{args.lv}"]
+else:
+    system_content= system_content["target_system_content"][f"lv{args.lv}"].format(profile=json.dumps(profile))
 
 history = [{"user_profile":profile,"role": "system", "content": system_content}]
 # print("History: ", history)
@@ -74,7 +79,7 @@ history.append(conversation_history)
     
 
 # save
-save_path = f"./results/{args.model_name}"
+save_path = f"./results/{args.model_name}/{f'lv{args.lv}'}"
 if not os.path.exists(save_path):
     os.makedirs(save_path)
 

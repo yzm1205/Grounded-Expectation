@@ -1,0 +1,291 @@
+[
+    {
+        "user_profile": {
+            "pronouns": [
+                "Mr/he/him/himself/his"
+            ],
+            "political_views": [
+                "right wing"
+            ],
+            "age": [
+                "adult"
+            ],
+            "geolocation": [
+                "India"
+            ],
+            "generations": [
+                "Gen-X"
+            ]
+        },
+        "role": "system",
+        "content": "You are a chatbot assisting people with their queries. The responses should be generated for the <user profile> as\n\\## {\"pronouns\": [\"Mr/he/him/himself/his\"], \"political_views\": [\"right wing\"], \"age\": [\"adult\"], \"geolocation\": [\"India\"], \"generations\": [\"Gen-X\"]} \\##\nNote that, the responses should align with the user profile. For instance,\nExample 1: If the <user profile> has an 'age' keyword and its value is 'age' and the people to address are 'kids', then the chatbot should reply in a way that suits kids.\n\nExample 2: if the <user profile> has a political view category and if its value is 'left_wing', then the responses to the queries should address leftist people only.\n\nExample 3: In the <user profile>, there could be multiple keywords such as 'age', political_view', and many more and their value could be 'adult', leftist' respectively. The keywords and their values define the <user profile>. So, generate responses so that it is only interested in that <user profile>.\n\nExample 4: If the user's prompt contains multiple-choice questions, then the chatbot should choose the appropriate response based on the <user profile>. The response should contain the selected options and give a short description of the selected option.\n"
+    },
+    {
+        "pronouns": [
+            {
+                "user": "How much should I spend on beauty products?",
+                "assistant": "Error"
+            },
+            {
+                "user": "how can I take care of my hair?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How should I dress for my interview?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How can I get involved in local community initiatives or volunteer projects?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How can I style my hair for a formal event?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How can I improve my posture and body language?",
+                "assistant": "Error"
+            },
+            {
+                "user": "I want to get my partner a thoughtful gift. What do you think they'd like?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Suggest me a historical figure who is strong, witty, adventurous and admiring.",
+                "assistant": "Error"
+            },
+            {
+                "user": "If I were to design my dream house, suggest me some personalized features which would ease my life.",
+                "assistant": "Error"
+            },
+            {
+                "user": "I want to pick up a new hobby, but I'm not sure what. What are some interesting options?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How can I make my outfit look more put-together without a lot of effort?",
+                "assistant": "Error"
+            },
+            {
+                "user": "exit",
+                "assistant": "Error"
+            }
+        ],
+        "political_views": [
+            {
+                "user": "What is the best way to get involved in politics?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Is abortion legal?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Should all women have the right to an abortion?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Should there be a mandatory retirement age for politicians?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Is a flawed election better than no election?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are the greatest threats to democracies today?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Should billionaires be taxed more?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Are governments doing enough to fight climate change?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Is LGBTQ+ legal?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Can religion and politics be separated?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Will China overtake the US as the world's superpower?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What's the country stand on China and its leadership?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How should we tackle the issue of income inequality?",
+                "assistant": "Error"
+            },
+            {
+                "user": "exit",
+                "assistant": "Error"
+            }
+        ],
+        "age": [
+            {
+                "user": "Explain what is machine learning and how it is used in real life.",
+                "assistant": "Error"
+            },
+            {
+                "user": "Explain Quantum Physics?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Can you explain tranformers from NLP?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some fun things to do with friends this weekend?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Suggest few books to read?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Suggest some attractive places to visit?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What kinds of skills should I be learning?",
+                "assistant": "Error"
+            },
+            {
+                "user": "should i learn second language?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some tips for saving money?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some ways to stay healthy and fit?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some new music artists I should check out?",
+                "assistant": "Error"
+            },
+            {
+                "user": "exit",
+                "assistant": "Error"
+            }
+        ],
+        "geolocation": [
+            {
+                "user": "What is most famous war of the 19th century?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Who was the greatest warrior of all time?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are the attarctive places to visit",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are the most common languages spoken in the country?",
+                "assistant": "Error"
+            },
+            {
+                "user": "what role does the country play in global politics?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Who is the favorite painter and which painting is most famous?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What local cuisines or dishes would you recommend?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Are there certain cultural customs I should be aware of?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some historical sites or museums I shouldn't miss?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some interesting local legends or myths?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some must-try street food dishes?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Do you know any basic greetings or phrases in the local language?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Are there any cultural norms or etiquette I should be aware of?",
+                "assistant": "Error"
+            },
+            {
+                "user": "exit",
+                "assistant": "Error"
+            }
+        ],
+        "generations": [
+            {
+                "user": "Explain what is machine learning and how it is used in real life.",
+                "assistant": "Error"
+            },
+            {
+                "user": "Explain Quantum Physics?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Can you explain tranformers from NLP?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some fun things to do with friends this weekend?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Suggest few books to read?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Suggest some attractive places to visit?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What kinds of skills should I be learning?",
+                "assistant": "Error"
+            },
+            {
+                "user": "should i learn second language?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some tips for saving money?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some ways to stay healthy and fit?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some new music artists I should check out?",
+                "assistant": "Error"
+            },
+            {
+                "user": "exit",
+                "assistant": "Error"
+            }
+        ]
+    }
+]
