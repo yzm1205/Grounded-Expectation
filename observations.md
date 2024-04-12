@@ -10,8 +10,9 @@
 - sometimes replied with counter questions
 
 
-# Claudi
+# Claude
 - by default, the responses focused USA.
+- reponses are very long. (check the token limit. That could be the reason. )
 
 # Gemini
 - Q: What is most famous war of the 19th century? : Profile-0

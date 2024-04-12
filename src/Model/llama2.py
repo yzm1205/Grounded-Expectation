@@ -4,10 +4,6 @@ sys.path.insert(0,"/data/yash/llama-2/llama/")
 import fire
 from llama import Llama
 
-# 3eacdfaea588aeef
-# f4ee6f4ceaf0ab85
-# 2e55e8db89a656d7
-# a8b05cad536551a8
 
 def main(
     ckpt_dir: str,
