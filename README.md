@@ -24,6 +24,14 @@ Can have a very personailzed conversation with a chatbot. The customized personl
 ### GPT4
 - Context window
 
+### Phi-3
+- Phi-3 mini 3.8B vs LLaMA3-8b
+- Phi-3 mini 7B
+
+
+### LLaMA3
+
+
 ## Gemini
 - By: Google
 - Open Source
@@ -49,6 +57,8 @@ Can have a very personailzed conversation with a chatbot. The customized personl
 - Open Source
 - Context window: 
 - Desc: It is multilingual and uses instruction fine-tuning that improves the performance and usability of pretrained language models. It is a variant of T5 that generalises better and outperforms T5 in many Natural Language Processing tasks.
+
+## Mistral
 
 ## Mixtral
 - By: Mistral
