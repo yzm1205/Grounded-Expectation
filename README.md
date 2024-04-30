@@ -25,7 +25,7 @@ Can have a very personailzed conversation with a chatbot. The customized personl
 - Context window
 
 ### Phi-3
-- Phi-3 mini 3.8B vs LLaMA3-8b
+- Phi-3 mini 3.8B 128K instruct model vs LLaMA3-8b
 - Phi-3 mini 7B
 
 
