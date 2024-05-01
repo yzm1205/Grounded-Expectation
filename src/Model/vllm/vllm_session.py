@@ -7,6 +7,7 @@ import torch
 import transformers
 from vllm import LLM, SamplingParams
 from vllm.transformers_utils.config import get_config
+import yaml
 
 
 
@@ -18,7 +19,7 @@ class VllmSession(ChatSession):
     A subclass of ChatSession specifically for the LLAMA2 language model, using YAML configuration.
     """
 
-    def __init__(self, config, model_name, temperature=0.1):
+    def __init__(self, config, model_name, system_message, temperature=0.1):
         """
         Initializes the LLAMA2 chat session.
 
@@ -33,7 +34,7 @@ class VllmSession(ChatSession):
             'num_devices',
             torch.cuda.device_count()
         )
-        
+        self.system_message = system_message
         # self.is_generation_model = is_generation_model
         tensor_parallel_size = self._set_tensor_parallel(num_devices)
 
@@ -57,15 +58,14 @@ class VllmSession(ChatSession):
     def get_session_type(self) -> str:
         return 'vllm'
 
-    def get_response(self,
+    def generate_response(self,
                      user_message:   str | list,
-                     system_message: str | list = None,
                      clean_output:   bool = True):
         """
         Retrieves a response from the vLLM language model.
         """
 
-        msg, return_str = self._prepare_batch(user_message, system_message)
+        msg, return_str = self._prepare_batch(user_message, self.system_message)
         # Implement the logic to interact with the LLAMA2 model's API
         # This is a placeholder implementation
 
@@ -122,18 +122,21 @@ class VllmSession(ChatSession):
 
 
 if __name__ == "__main__":
-    config_gpu = {
-                  "batch_size":{"default":1
-                      },
-                  "model_cache":"/data/shared/llm_cache/"}
-    vllm = VllmSession(config_gpu,"meta-llama/Meta-Llama-3-8B-Instruct",temperature = 1.0)
-    #mistralai/Mistral-7B-Instruct-v0.1
-    
+    # config_gpu = {
+    #               "batch_size":{"default":1
+    #                   },
+    #               "model_cache":"/data/shared/llm_cache/"}
     profile = "Gen-Y"
     system_content= f"You are a chat bot assiting people with their queries. The responses should be genereated for the user profile as {profile}. Note that, the repsonses should align with the user profile. For instance, example 1: If the user profile has 'age' keyword and its value is 'age' and the people to address are 'kids', then the chatbot should reply in a way that is suitable for kids. -  Similarly, Example 2: if the user profile has'political view' category and if its value is 'left wing', then the responses to the quires should address leftist people only. - Example 3: In the user profile, there could be multiple keywords such as 'age', political_view' and many more and its value could be 'adult', leftist' respectively. The keywords and its values define the user profile. So, generate responses such that it only intereset to that user profile."
+    with open("./src/Model/vllm/vllm_config.yaml","r") as f:
+        config_gpu = yaml.safe_load(f)
+    vllm = VllmSession(config_gpu,"meta-llama/Meta-Llama-3-8B-Instruct",temperature = 1.0,system_message=system_content,)
+    #mistralai/Mistral-7B-Instruct-v0.1
+    
+    
     
     usr_prompt = "What are the fun activities to do around?"
-    response = vllm.get_response(system_message=system_content,
+    response = vllm.get_response(
                                  user_message = usr_prompt
                                  
                                  )  

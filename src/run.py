@@ -5,6 +5,7 @@ from argparse import ArgumentParser
 import os
 import yaml
 import sys
+from Model.vllm.vllm_session import VllmSession
 
 parser = ArgumentParser() 
 
@@ -33,6 +34,8 @@ with open("./config/system_prompt.yaml", "r") as f:
 with open("./config/evaluation-profile.json", "r") as f:
     user_profile = json.load(f)
     
+with open("./src/Model/vllm/vllm_config.yaml","r") as f:
+    vllm_config = yaml.safe_load(f)
     
 # get prompts
 with open("./config/prompts.json", "r") as f:
@@ -56,41 +59,63 @@ if args.model_name in ["GPT3","gpt3"]:
     model = gpt.GPTModel(system_role=system_content)
 elif args.model_name in ["GPT4","gpt4"]:
     model = gpt.GPTModel(system_role=system_content)
-elif args.model_name in ["claude","Claude"]:
+elif args.model_name in ["claude","Claude","claude3"]:
     model = claude.ClaudeModel(system_role=system_content)
 elif args.model_name in ["gemini","Gemini"]:
     model = gemini.GeminiModel(system_role=system_content)
 elif args.model_name in ["Llama3","LLaMA3","llama3"]:
-    pass
+    model = VllmSession(vllm_config,"meta-llama/Meta-Llama-3-8B-Instruct", system_message=system_content,temperature = 1.0)
 elif args.model_name in ["Mistral","mistral"]:
-    pass
+    model = VllmSession(vllm_config,"mistralai/Mistral-7B-Instruct-v0.1",system_message=system_content,temperature = 1.0)
 elif args.model_name in [f"Phi3-min","phi3-min","phi"]:
     model = phi.phi3mini(system_role=system_content,cuda_device=args.cuda)
 
 
-# TODO: select category from profile desc
-# while True:
-    # prompt = "What is the purpose of life?"
-    
+
+# This code can be used when we want one prompt passed at a time.     
+# all_categoiries = list(profile.keys())
+# conversation_history = {}
+# for cat_idx, category_key in enumerate(all_categoiries):
+#     cat_prompts = list(prompts["category"][category_key][args.prompt_type].values())
+#     conversation_history[category_key] = []
+#     for idx,prompt in enumerate(cat_prompts):
+#         if prompts in ["exit", "quit", "bye"]:
+#             break 
+#         print("\nUSER: ", prompt)
+#         try:
+#             conversation = model.generate_response(prompt)
+#         except:
+#             conversation = "Error"
+        
+#         conversation_history[category_key].append({"user":prompt,"assistant": conversation})
+#         print("\nAssistant: ", conversation)
+#         print(f"\n ###############  profile_{args.profile_num} --- {category_key} --- questions # {idx} ###############\n")
+# history.append(conversation_history)
+
+
+# passing all prompts as a list. 
 all_categoiries = list(profile.keys())
 conversation_history = {}
-for category_key in all_categoiries:
+for cat_idx, category_key in enumerate(all_categoiries):
     cat_prompts = list(prompts["category"][category_key][args.prompt_type].values())
     conversation_history[category_key] = []
-    for prompt in cat_prompts:
-        if prompts in ["exit", "quit", "bye"]:
-            break 
-        print("\nUSER: ", prompt)
-        try:
-            conversation = model.generate_response(prompt)
-        
-        except:
-            conversation = "Error"
-        
-        conversation_history[category_key].append({"user":prompt,"assistant": conversation})
-        print("\nAssistant: ", conversation)
-        print(f"\n###################################### ---- profile_{args.profile_num}\n")
+    # for idx,prompt in enumerate(cat_prompts):
+    print(f"\n ###############  profile_{args.profile_num} --- {category_key} --- questions ###############\n")
+    if prompts in ["exit", "quit", "bye"]:
+        break 
+    try:
+        conversation = model.generate_response(cat_prompts)
+    except:
+        conversation = "Error"
+    profile_conv = []
+    for k,v in zip(cat_prompts,conversation):
+        profile_conv.append({"user":k,"assistant":v})
+    conversation_history[category_key].append(profile_conv)
+    # print(profile_conv)
+    # breakpoint()
 history.append(conversation_history)
+
+# print(history)
     
 
 # save
@@ -101,3 +126,4 @@ if not os.path.exists(save_path):
 count = len(os.listdir(save_path)) + 1
 with open(f"{save_path}/profile_{args.profile_num}_{args.prompt_type}.json", "a") as f:
     json.dump(history, f, indent=4)
+

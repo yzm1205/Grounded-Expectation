@@ -1,7 +1,8 @@
 import torch
 from typing import List
-
-from utils import (
+import sys
+sys.path.insert(0,"/home/yash/Grounded-Expectation/src/")
+from myutils import (
     display
 )
 
@@ -142,9 +143,10 @@ class ChatSession:
             return_str=True
             return msg, return_str
 
-        if sys_msg is None:
-            sys_msg = [None]*len(usr_msg)
-
+        #if sys_msg is None:
+            #sys_msg = [None]*len(usr_msg)
+        sys_msg = [self.system_message]*len(usr_msg)
+        
         # ensure length of usr_msg and sys_msg match
         if len(usr_msg) != len(sys_msg):
             display.error('length of usr_msg does not match length of sys_msg')
