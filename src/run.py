@@ -1,15 +1,19 @@
 from math import e
+from turtle import color
+
+from click import progressbar
 from Model import *
 import json
 from argparse import ArgumentParser
 import os
 import yaml
 import sys
+from tqdm import tqdm
 from Model.vllm.vllm_session import VllmSession
 
 parser = ArgumentParser() 
 
-parser.add_argument("-p",dest="profile_num", type = str, help="Set User profile", default="0")
+parser.add_argument("-p",dest="profile_num", type = str, help="Set User profile", default="1")
 
 parser.add_argument("-pt",dest="prompt_type", type = str, help="Select one prompt type from 1) General Questions 2) MCQ", default="general_questions")
 
@@ -20,6 +24,8 @@ parser.add_argument("-lv",dest="lv", type = str, help="Provide TELer Prompt Leve
 parser.add_argument("-pl",dest="profile_location", type = str, help="Profile Location : [USA, India, Bangladesh]", default="USA")
 
 parser.add_argument("-cuda",dest="cuda", type = str, help="Cuda device number", default="1")
+parser.add_argument("-save",dest="save", type = bool, help="save data", default=True)
+
 
 
 
@@ -53,8 +59,6 @@ history = [{"user_profile":profile,"role": "system", "content": system_content}]
 # print("History: ", history)
 
 
-# model = gpt.GPT3Model(sysetm_role=system_content)
-
 if args.model_name in ["GPT3","gpt3"]:  
     model = gpt.GPTModel(system_role=system_content)
 elif args.model_name in ["GPT4","gpt4"]:
@@ -73,57 +77,70 @@ elif args.model_name in [f"Phi3-min","phi3-min","phi"]:
 
 
 # This code can be used when we want one prompt passed at a time.     
-# all_categoiries = list(profile.keys())
-# conversation_history = {}
-# for cat_idx, category_key in enumerate(all_categoiries):
-#     cat_prompts = list(prompts["category"][category_key][args.prompt_type].values())
-#     conversation_history[category_key] = []
-#     for idx,prompt in enumerate(cat_prompts):
-#         if prompts in ["exit", "quit", "bye"]:
-#             break 
-#         print("\nUSER: ", prompt)
-#         try:
-#             conversation = model.generate_response(prompt)
-#         except:
-#             conversation = "Error"
-        
-#         conversation_history[category_key].append({"user":prompt,"assistant": conversation})
-#         print("\nAssistant: ", conversation)
-#         print(f"\n ###############  profile_{args.profile_num} --- {category_key} --- questions # {idx} ###############\n")
-# history.append(conversation_history)
-
-
-# passing all prompts as a list. 
 all_categoiries = list(profile.keys())
 conversation_history = {}
 for cat_idx, category_key in enumerate(all_categoiries):
     cat_prompts = list(prompts["category"][category_key][args.prompt_type].values())
     conversation_history[category_key] = []
-    # for idx,prompt in enumerate(cat_prompts):
-    print(f"\n ###############  profile_{args.profile_num} --- {category_key} --- questions ###############\n")
-    if prompts in ["exit", "quit", "bye"]:
-        break 
-    try:
-        conversation = model.generate_response(cat_prompts)
-    except:
-        conversation = "Error"
-    profile_conv = []
-    for k,v in zip(cat_prompts,conversation):
-        profile_conv.append({"user":k,"assistant":v})
-    conversation_history[category_key].append(profile_conv)
-    # print(profile_conv)
-    # breakpoint()
+    progress_bar = tqdm(total=len(cat_prompts))
+    # progress_bar.set_description(color="green")
+
+    for idx,prompt in enumerate(cat_prompts):
+        # print(f"\n ###############  profile_{args.profile_num} --- {category_key} --- questions # {idx} ###############\n")
+        progress_bar.set_description(f"profile_{args.profile_num} --- {category_key}")
+        
+        if prompt in ["exit", "quit", "bye"]:
+            conversation_history[category_key].append({"user":prompt,"assistant": "exited"})
+            progress_bar.update(1)
+            # print(f"user:{prompt},assistant: exited")
+            break 
+        # print("\nUSER: ", prompt)
+        try:
+            conversation = model.generate_response(prompt)
+        except KeyboardInterrupt:
+            sys.exit()
+        except Exception as e:
+            conversation = "Error"
+            print("There is an error profile_{args.profile_num} --- {category_key} --- question {idx}")
+        conversation_history[category_key].append({"user":prompt,"assistant": conversation})
+        # print("\nAssistant: ", conversation)
+        progress_bar.update(1)
 history.append(conversation_history)
+progress_bar.close()
+
+
+# passing all prompts as a list. 
+# all_categoiries = list(profile.keys())
+# conversation_history = {}
+# for cat_idx, category_key in enumerate(all_categoiries):
+#     cat_prompts = list(prompts["category"][category_key][args.prompt_type].values())
+#     conversation_history[category_key] = []
+#     # for idx,prompt in enumerate(cat_prompts):
+#     print(f"\n ###############  profile_{args.profile_num} --- {category_key} --- questions ###############\n")
+#     try:
+#         conversation = model.generate_response(cat_prompts)
+#     except:
+#         conversation = "Error"
+#     profile_conv = []
+#     for k,v in zip(cat_prompts,conversation):
+#         profile_conv.append({"user":k,"assistant":v})
+#     conversation_history[category_key].append(profile_conv)
+#     # print(profile_conv)
+#     # breakpoint()
+# history.append(conversation_history)
 
 # print(history)
-    
 
 # save
-save_path = f"./results/user_profile_{args.profile_location}/{args.model_name}"
-if not os.path.exists(save_path):
-    os.makedirs(save_path)
+if args.save == True:
+    save_path = f"./results/user_profile_{args.profile_location}/{args.model_name}"
+    if not os.path.exists(save_path):
+        os.makedirs(save_path)
 
-count = len(os.listdir(save_path)) + 1
-with open(f"{save_path}/profile_{args.profile_num}_{args.prompt_type}.json", "a") as f:
-    json.dump(history, f, indent=4)
+    count = len(os.listdir(save_path)) + 1
+    with open(f"{save_path}/profile_{args.profile_num}_{args.prompt_type}.json", "a") as f:
+        json.dump(history, f, indent=4)
+        
+    print(f"saving at: {save_path}/profile_{args.profile_num}_{args.prompt_type}.json")
+    
 
