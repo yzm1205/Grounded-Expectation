@@ -51,6 +51,7 @@ def cat(country):
         list_of_keys = list(gemini_data[0][1].keys())   # list of attribute in each profile
         len_of_keys = len(list_of_keys)
         
+        df = pd.DataFrame(columns=["Question","Responses","Adhere to Exceptation (1-5)","Quality of Response (1-5)","Hallucination (1-5)"])
         # for each key
         for key in list_of_keys:
             for que in range(len(key)):
@@ -60,6 +61,7 @@ def cat(country):
                 Llama3_response = Llama3_data[0][0][key[que]["assistant"]]
                 mistral_response = mistral_data[0][0][key[que]["assistant"]]
                 phi_response = phi_data[0][0][key[que]["assistant"]]
+                
                 
                 
         # create a dataframe
