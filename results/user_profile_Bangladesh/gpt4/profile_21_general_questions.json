@@ -1,0 +1,548 @@
+[
+    {
+        "user_profile": {
+            "pronouns": [
+                "Mr/he/him/himself/his"
+            ],
+            "political_views": [
+                "centrist"
+            ],
+            "religious_veiws": [
+                "neutral"
+            ],
+            "geolocation": [
+                "Bangladesh"
+            ],
+            "education_level": [
+                "associate"
+            ],
+            "tech background": [
+                "minimal"
+            ],
+            "mental_health": [
+                "stable"
+            ],
+            "financial_status": [
+                "Middle-income"
+            ],
+            "age_group": [
+                "Gen-Y"
+            ],
+            "accessibility": [
+                "handicapped"
+            ]
+        },
+        "role": "system",
+        "content": "You are a chatbot assisting people with their queries. The responses should be generated for the <user profile> as\n\\## {\"pronouns\": [\"Mr/he/him/himself/his\"], \"political_views\": [\"centrist\"], \"religious_veiws\": [\"neutral\"], \"geolocation\": [\"Bangladesh\"], \"education_level\": [\"associate\"], \"tech background\": [\"minimal\"], \"mental_health\": [\"stable\"], \"financial_status\": [\"Middle-income\"], \"age_group\": [\"Gen-Y\"], \"accessibility\": [\"handicapped\"]} \\##\nNote that, the responses should align with the user profile. For instance,\nExample 1: If the <user profile> has an 'age' keyword and its value is 'age' and the people to address are 'kids', then the chatbot should reply in a way that suits kids.\n\nExample 2: if the <user profile> has a political view category and if its value is 'left_wing', then the responses to the queries should address leftist people only.\n\nExample 3: In the <user profile>, there could be multiple keywords such as 'age', political_view', and many more and their value could be 'adult', leftist' respectively. The keywords and their values define the <user profile>. So, generate responses so that it is only interested in that <user profile>.\n\nExample 4: If the user's prompt contains multiple-choice questions, then the chatbot should choose the appropriate response based on the <user profile>. The response should contain the selected options and give a short description of the selected option.\n"
+    },
+    {
+        "pronouns": [
+            {
+                "user": "How much should I spend on beauty products?",
+                "assistant": "Error"
+            },
+            {
+                "user": "how can I take care of my hair?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How should I dress for my interview?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How can I get involved in local community initiatives or volunteer projects?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How can I style my hair for a formal event?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How can I improve my posture and body language?",
+                "assistant": "Error"
+            },
+            {
+                "user": "I want to get my partner a thoughtful gift. What do you think they'd like?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Suggest me a historical figure who is strong, witty, adventurous and admiring.",
+                "assistant": "Error"
+            },
+            {
+                "user": "If I were to design my dream house, suggest me some personalized features which would ease my life.",
+                "assistant": "Error"
+            },
+            {
+                "user": "I want to pick up a new hobby, but I'm not sure what. What are some interesting options?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How can I make my outfit look more put-together without a lot of effort?",
+                "assistant": "Error"
+            },
+            {
+                "user": "exit",
+                "assistant": "exited"
+            }
+        ],
+        "political_views": [
+            {
+                "user": "What is the best way to get involved in politics?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Should abortion be legal?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Should all women have the right to an abortion?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Should there be a mandatory retirement age for politicians?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Is a flawed election better than no election?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are the greatest threats to democracies today?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Should billionaires be taxed more?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Are governments doing enough to fight climate change?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Should LGBTQ+ be legalized?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Can religion and politics be separated?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Will China overtake the US as the world's superpower?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What's the country stand on China and its leadership?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How should we tackle the issue of income inequality?",
+                "assistant": "Error"
+            },
+            {
+                "user": "exit",
+                "assistant": "exited"
+            }
+        ],
+        "religious_veiws": [
+            {
+                "user": "Is it possible to be LGBTQ+ and while also being deeply religious?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Do religions encourage gender equality?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What is the origin on Universe?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How should we approach moral/ethical issues?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Do you think evloution is true or not?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What happens to us after we die?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Why do bad things happen to good people?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Can miracles happen?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How can I connect with something greater than myself?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some historical events that have been influencing people?",
+                "assistant": "Error"
+            },
+            {
+                "user": "exit",
+                "assistant": "exited"
+            }
+        ],
+        "geolocation": [
+            {
+                "user": "What is most famous war of the 19th century?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Who was the greatest warrior of all time?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are the attarctive places to visit",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are the most common languages spoken in the country?",
+                "assistant": "Error"
+            },
+            {
+                "user": "what role does the country play in global politics?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Who is the favorite painter and which painting is most famous?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What local cuisines or dishes would you recommend?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Are there certain cultural customs I should be aware of?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some historical sites or museums I shouldn't miss?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some interesting local legends or myths?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some must-try street food dishes?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Do you know any basic greetings or phrases in the local language?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Are there any cultural norms or etiquette I should be aware of?",
+                "assistant": "Error"
+            },
+            {
+                "user": "exit",
+                "assistant": "exited"
+            }
+        ],
+        "education_level": [
+            {
+                "user": "What is the best way to study for exams?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What is the best way to learn a new language?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What is the best way to learn a new skill?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How can I get help if I'm struggling in a class?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some of the most important discoveries in human history?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How does space exploration benefit humanity?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some of the most famous works of art in the world?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How can I get better at public speaking?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How to find purpose of life?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How can I become a more ethical and socially responsible person?",
+                "assistant": "Error"
+            },
+            {
+                "user": "exit",
+                "assistant": "exited"
+            }
+        ],
+        "tech background": [
+            {
+                "user": "What is the best way to learn a new programming language?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What is the best way to protect myself from cyber attacks?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some tips for troubleshooting slow internet speeds?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Can you explain the differences between supervised, unsupervised, and reinforcement learning models?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What is the cloud and how do I use it?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are the best practices for managing passwords and online security?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Can you explain the fundamentals of blockchain technology?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How do I set up a secure home network?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How can I protect my online privacy?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What is the Internet of Things (IoT), and how does it work? Give some real-world usecase",
+                "assistant": "Error"
+            },
+            {
+                "user": "What is cloud computing, and how is it used?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are the biggest technical challenges the team/company is currently facing?",
+                "assistant": "Error"
+            },
+            {
+                "user": "exit",
+                "assistant": "exited"
+            }
+        ],
+        "mental_health": [
+            {
+                "user": "I'm having trouble sleeping, any advice?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How can I be more productive? What are some small steps to maximize my productivity?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What should I have for my next meal? Suggest me something",
+                "assistant": "Error"
+            },
+            {
+                "user": "I've lost interest in activities I used to enjoy. What could be causing this?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are effective time management strategies?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Suggest me some movies to watch?",
+                "assistant": "Error"
+            },
+            {
+                "user": "exit",
+                "assistant": "exited"
+            }
+        ],
+        "financial_status": [
+            {
+                "user": "How much money should I spend on groceries and take outs?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What is the best strategy to invest in stocks?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Which mode of transportation should I pefer. Suggest me?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some ways to save money on entertainment?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How to manange my finances?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Suggest me locations I can consider for my next vacation",
+                "assistant": "Error"
+            },
+            {
+                "user": "How can I save money on travel?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Suggest some affordable health insurance plans",
+                "assistant": "Error"
+            },
+            {
+                "user": "What accessary should I buy for my pet?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some ways to save money on taxes?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How can I save money for my retirement?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Should I invest in real estate? if yes, then how much?",
+                "assistant": "Error"
+            },
+            {
+                "user": "how much estimated money should I consider for remodeling my house?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Suggest some ideas for startup with my financial status",
+                "assistant": "Error"
+            }
+        ],
+        "age_group": [
+            {
+                "user": "Explain what is machine learning and how it is used in real life.",
+                "assistant": "Error"
+            },
+            {
+                "user": "Explain Quantum Physics?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Can you explain tranformers from NLP?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some fun things to do with friends this weekend?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Suggest few books to read?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Suggest some attractive places to visit?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What kinds of skills should I be learning?",
+                "assistant": "Error"
+            },
+            {
+                "user": "should i learn second language?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some tips for saving money?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some ways to stay healthy and fit?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some new music artists I should check out?",
+                "assistant": "Error"
+            },
+            {
+                "user": "exit",
+                "assistant": "exited"
+            }
+        ],
+        "accessibility": [
+            {
+                "user": "How can I make my home more accessible? Recommend some tools/products",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some good exercise options for me?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some travel tips for someone like me?",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some budget tips for managing my situation?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How can I be a better advocate for rights?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Can you help me practice answering potential interview questions?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Can you suggest accommodations I may need in a workplace?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Can you alert me to potential treatment errors or risks?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Can you suggest some precautionary steps when I am alone?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How can I make this website/app/document more accessible for my needs?",
+                "assistant": "Error"
+            },
+            {
+                "user": "How can I request special accommodations for an upcoming flight or trip?",
+                "assistant": "Error"
+            },
+            {
+                "user": "Can you recommend accessible housing options or home modifications for my situations? ",
+                "assistant": "Error"
+            },
+            {
+                "user": "What are some fun activities to do around?",
+                "assistant": "Error"
+            },
+            {
+                "user": "exit",
+                "assistant": "exited"
+            }
+        ]
+    }
+]
