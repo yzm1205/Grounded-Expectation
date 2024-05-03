@@ -1,8 +1,5 @@
 # Grounded-Expectation
 
-# TODO
-    - Merge all model responses into an excel file for annotations
-
 
 ## - Domain Expert: 
 Dictate the *guideliness* for the chatbot. A chatbot must follow the guideliness and assist **Target Users**.
