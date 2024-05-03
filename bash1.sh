@@ -2,7 +2,7 @@
 
 
 USA(){
-    for i in {1..21}; do
+    for i in {6..21}; do
     python src/run.py -p $i -m gpt4 -pl USA -save True
     # CUDA_VISIBLE_DEVICES=0,1 python src/run.py -p $i -m Llama3 -pl USA -save True
     done
@@ -26,5 +26,5 @@ USA
 echo "India Profile Running"
 India 
 
-# echo "Bangladesh Profile Running"
-# Bangladesh 
+echo "Bangladesh Profile Running"
+Bangladesh 
