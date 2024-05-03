@@ -1,7 +1,7 @@
 #!/bin/bash
 
 USA(){
-    for i in {0..21}; do
+    for i in {3..21}; do
     # CUDA_VISIBLE_DEVICES=2,3 python src/run.py -p $i -m mistral -pl USA -save True
     python src/run.py -p $i -m claude -pl USA -save True
 
@@ -26,5 +26,5 @@ USA
 echo "India Profile Running"
 India 
 
-# echo "India Profile Running"
-# Bangladesh 
+echo "India Profile Running"
+Bangladesh 
