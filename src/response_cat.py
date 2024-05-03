@@ -38,6 +38,9 @@ def cat(country):
     Llama3 = os.path.join(result_path,f"user_profile_{country}/Llama3/")
     mistral = os.path.join(result_path,f"user_profile_{country}/mistral/")
     phi = os.path.join(result_path,f"user_profile_{country}/phi/")
+    gpt4 = os.path.join(result_path,f"user_profile_{country}/gpt4/")
+    claude = os.path.join(result_path,f"user_profile_{country}/claude/")
+    
     
     total_profiles = len(os.listdir(gemini))
     for profile_num in range(total_profiles):
@@ -52,6 +55,12 @@ def cat(country):
             
         with open(f"{phi}{list_json_files(phi)[profile_num]}","r") as file:
             phi_data = json.load(file)      
+        
+        with open(f"{gpt4}{list_json_files(gpt4)[profile_num]}","r") as file:
+            gpt4_data = json.load(file)      
+            
+        with open(f"{claude}{list_json_files(claude)[profile_num]}","r") as file:
+            claude_data = json.load(file)      
             
         # common user profile
         user_profile = gemini_data[0]["user_profile"]  
@@ -69,56 +78,79 @@ def cat(country):
                 # for each question, response for a llm
                 question = gemini_data[1][attr][que_num]["user"]
                 gemini_response = gemini_data[1][attr][que_num]["assistant"]
-                Llama3_response = Llama3_data[1][attr][que_num]["assistant"]
+                gpt4_response = gpt4_data[1][attr][que_num]["assistant"]
+                claude_response = claude_data[1][attr][que_num]["assistant"]
+                try:
+                    Llama3_response = Llama3_data[1][attr][que_num]["assistant"]
+                except TypeError:
+                    Llama3_response = Llama3_data[1][attr][que_num][0]["assistant"]
+                except IndexError:
+                    Llama3_response = Llama3_data[1][attr][0][que_num]["assistant"]
                 mistral_response = mistral_data[1][attr][que_num]["assistant"]
                 phi_response = phi_data[1][attr][que_num]["assistant"]
                 
                 # Model
-                df.at[count,"Model"] = "Gemini"
+                df.at[count,"Model"] = "Gpt4"
                 df.at[count+1,"Model"] = "Llama3"
                 df.at[count+2,"Model"] = "Mistral"
-                df.at[count+3,"Model"] = "Phi"
+                df.at[count+3,"Model"] = "Claude"
+                df.at[count+4,"Model"] = "Gemini"
+                df.at[count+5,"Model"] = "Phi"
+                df.at[count+6,"."] = "."
+                
                 
                 # User Profile
                 df.at[count,"User_Profile"] = json.dumps(user_profile,indent=4)  
                 df.at[count+1,"User_Profile"] = "."
                 df.at[count+2,"User_Profile"] = "."
                 df.at[count+3,"User_Profile"] = "."
+                df.at[count+4,"User_Profile"] = "."
+                df.at[count+5,"User_Profile"] = "."
+                df.at[count+6,"."] = "."
+                
+                
                 
                 #prompt
                 df.at[count,"Prompt"] = question
                 df.at[count+1,"Prompt"] = "."
                 df.at[count+2,"Prompt"] = "."
                 df.at[count+3,"Prompt"] = "."
+                df.at[count+4,"Prompt"] = "."
+                df.at[count+5,"Prompt"] = "."
+                df.at[count+6,"."] = "."
+                
+                
                 
                 # Model Responses
-                df.at[count,"Response"] = gemini_response
+                df.at[count,"Response"] = gpt4_response
                 df.at[count+1,"Response"] = Llama3_response
                 df.at[count+2,"Response"] = mistral_response
-                df.at[count+3,"Response"] = phi_response
+                df.at[count+3,"Response"] = claude_response
+                df.at[count+4,"Response"] = gemini_response
+                df.at[count+5,"Response"] = phi_response
+                df.at[count+6,"."] = "."
                 
-                count += 4
+                
+                count += 7
             
        
         save_path = f"./results/Aggregated_response/{country}_responses.xlsx"
-        with pd.ExcelWriter(save_path,mode="a",if_sheet_exists="overlay") as write:
-            df.to_excel(write,sheet_name=f"Profile_{profile_num}")
+        if os.path.exists(save_path):
+            with pd.ExcelWriter(save_path, mode ="a",if_sheet_exists='overlay') as write:
+                df.to_excel(write,sheet_name=f"Profile_{profile_num}")
+        else:
+            df.to_excel(save_path,sheet_name=f"Profile_{profile_num}",header=True,
+                        merge_cells=True)
+        # with pd.ExcelWriter(save_path,mode="a",if_sheet_exists="overlay") as write:
+        #     df.to_excel(write,sheet_name=f"Profile_{profile_num}")
         
             
-            
-            
-            
-            
-                
-                
-                
-                
         # create a dataframe
         # append all the respsones for each profile each model and each questions
         # save the profile in annotation folder
         
 if __name__ == "__main__":
-    cat("USA")
+    cat("Bangladesh")
     print("done")
         
                 
