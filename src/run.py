@@ -26,10 +26,6 @@ parser.add_argument("-pl",dest="profile_location", type = str, help="Profile Loc
 parser.add_argument("-cuda",dest="cuda", type = str, help="Cuda device number", default="1")
 parser.add_argument("-save",dest="save", type = bool, help="save data", default=True)
 
-
-
-
-
 # get system content
 with open("./config/system_prompt.yaml", "r") as f:
     system_content = yaml.safe_load(f)
@@ -37,6 +33,7 @@ with open("./config/system_prompt.yaml", "r") as f:
 # get user profile
 # with open("./config/user_profile.json", "r") as f:
 #     user_profile = json.load(f)
+
 with open("./config/evaluation-profile.json", "r") as f:
     user_profile = json.load(f)
     

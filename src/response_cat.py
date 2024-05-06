@@ -68,7 +68,8 @@ def cat(country):
         list_of_attr = list(gemini_data[1].keys())   # list of attribute in each profile
         len_of_keys = len(list_of_attr)
         
-        df = pd.DataFrame(columns=["User_Profile","Prompt","Response","Model","Adhere to Exceptation (1-5)","Quality of Response (1-5)","Hallucination (1-5)"])
+        df = pd.DataFrame(columns=["User_Profile","Prompt","Response","Model","Adhere to Exceptation (1-5)",
+                                   "Quality of Response (1-5)","Hallucination (1-5)"])
         profile_response_by_country = []
         # for each key
         count=0
@@ -141,14 +142,8 @@ def cat(country):
         else:
             df.to_excel(save_path,sheet_name=f"Profile_{profile_num}",header=True,
                         merge_cells=True)
-        # with pd.ExcelWriter(save_path,mode="a",if_sheet_exists="overlay") as write:
-        #     df.to_excel(write,sheet_name=f"Profile_{profile_num}")
         
-            
-        # create a dataframe
-        # append all the respsones for each profile each model and each questions
-        # save the profile in annotation folder
-        
+    
 if __name__ == "__main__":
     cat("Bangladesh")
     print("done")
