@@ -13,6 +13,18 @@ india_path = os.path.join(result_path,country_response_files[2])
 usa_path = os.path.join(result_path,country_response_files[1])
 bangalesh_path = os.path.join(result_path,country_response_files[0])
 
+# filtered 
+pronoun_ = [1,2,7,8,9]
+political_views_ = [2,4,5,7,9]
+religious_veiws_ = [1,3,5,6,7]
+geolocation_ = [1,2,4,7,10]
+education_level_ = [1,5,6,7,10]
+tech_background_ = [2,3,4,5,7]
+mental_health_ = [1,2,3,4,6]
+accessibility_ = [1,2,3,7,13]
+age_group_ = [1,2,4,5,9]
+financial_status_ = [3,6,7,10,12]
+
 
 # list of models in each country
 india = os.listdir(india_path)
@@ -70,25 +82,27 @@ def cat(country):
         
         df = pd.DataFrame(columns=["User_Profile","Prompt","Response","Model","Adhere to Exceptation (1-5)",
                                    "Quality of Response (1-5)","Hallucination (1-5)"])
-        profile_response_by_country = []
         # for each key
         count=0
         for attr in list_of_attr:
-            profile_response = {}
-            for que_num in range(len(gemini_data[1][attr])-1):
+            if attr == "tech background":
+                attr_ = "tech_background_"
+            else:
+                attr_ = attr + "_"
+            for que_num in range(5):
                 # for each question, response for a llm
-                question = gemini_data[1][attr][que_num]["user"]
-                gemini_response = gemini_data[1][attr][que_num]["assistant"]
-                gpt4_response = gpt4_data[1][attr][que_num]["assistant"]
-                claude_response = claude_data[1][attr][que_num]["assistant"]
+                question = gemini_data[1][attr][attr_[que_num+1]]["user"]
+                gemini_response = gemini_data[1][attr][attr_[que_num+1]]["assistant"]
+                gpt4_response = gpt4_data[1][attr][attr_[que_num+1]]["assistant"]
+                claude_response = claude_data[1][attr][attr_[que_num+1]]["assistant"]
                 try:
-                    Llama3_response = Llama3_data[1][attr][que_num]["assistant"]
+                    Llama3_response = Llama3_data[1][attr][attr_[que_num+1]]["assistant"]
                 except TypeError:
-                    Llama3_response = Llama3_data[1][attr][que_num][0]["assistant"]
+                    Llama3_response = Llama3_data[1][attr][attr_[que_num+1]][0]["assistant"]
                 except IndexError:
-                    Llama3_response = Llama3_data[1][attr][0][que_num]["assistant"]
-                mistral_response = mistral_data[1][attr][que_num]["assistant"]
-                phi_response = phi_data[1][attr][que_num]["assistant"]
+                    Llama3_response = Llama3_data[1][attr][0][attr_[que_num+1]]["assistant"]
+                mistral_response = mistral_data[1][attr][attr_[que_num+1]]["assistant"]
+                phi_response = phi_data[1][attr][attr_[que_num+1]]["assistant"]
                 
                 # Model
                 df.at[count,"Model"] = "Gpt4"
@@ -154,6 +168,17 @@ if __name__ == "__main__":
         
     
     
-    
+"""
+pronoun = [1,2,7,8,9]
+political_views = [2,4,5,7,9]
+religious_veiws = [1,3,5,6,7]
+geolocation = [1,2,4,7,10]
+education_level = [1,5,6,7,10]
+tech background = [2,3,4,5,7]
+mental_health = [1,2,3,4,6]
+accessibility = [1,2,3,7,13]
+age_group = [1,2,4,5,9]
+financial_status = [3,6,7,10,12]
+"""
     
     
