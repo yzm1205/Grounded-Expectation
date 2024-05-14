@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import json
 from datasets import Dataset
-
+from tqdm import tqdm
 
 country_response_files = ["user_profile_Bangladesh","user_profile_USA","user_profile_India"]
 model_list = ["gemini","Llama3","mistral","phi"]
@@ -13,17 +13,19 @@ india_path = os.path.join(result_path,country_response_files[2])
 usa_path = os.path.join(result_path,country_response_files[1])
 bangalesh_path = os.path.join(result_path,country_response_files[0])
 
-# filtered 
-pronoun_ = [1,2,7,8,9]
-political_views_ = [2,4,5,7,9]
-religious_veiws_ = [1,3,5,6,7]
-geolocation_ = [1,2,4,7,10]
-education_level_ = [1,5,6,7,10]
-tech_background_ = [2,3,4,5,7]
-mental_health_ = [1,2,3,4,6]
-accessibility_ = [1,2,3,7,13]
-age_group_ = [1,2,4,5,9]
+# filtered - they are true index, starting from 1
+filtered_list= dict(
+pronouns_ = [1,2,7,8,9],
+political_views_ = [2,4,5,7,9],
+religious_veiws_ = [1,3,5,6,7],
+geolocation_ = [1,2,4,7,10],
+education_level_ = [1,5,6,7,10],
+tech_background_ = [2,3,4,5,7],
+mental_health_ = [1,2,3,4,6],
+accessibility_ = [1,2,3,7,13],
+age_group_ = [1,2,4,5,9],
 financial_status_ = [3,6,7,10,12]
+)
 
 
 # list of models in each country
@@ -80,7 +82,7 @@ def cat(country):
         list_of_attr = list(gemini_data[1].keys())   # list of attribute in each profile
         len_of_keys = len(list_of_attr)
         
-        df = pd.DataFrame(columns=["User_Profile","Prompt","Response","Model","Adhere to Exceptation (1-5)",
+        df = pd.DataFrame(columns=["User_Profile","Prompt","Response","Adhere to Expectation (1-5)",
                                    "Quality of Response (1-5)","Hallucination (1-5)"])
         # for each key
         count=0
@@ -89,29 +91,42 @@ def cat(country):
                 attr_ = "tech_background_"
             else:
                 attr_ = attr + "_"
-            for que_num in range(5):
+                
+            for que_idx, que_num in enumerate(filtered_list[attr_]):
                 # for each question, response for a llm
-                question = gemini_data[1][attr][attr_[que_num+1]]["user"]
-                gemini_response = gemini_data[1][attr][attr_[que_num+1]]["assistant"]
-                gpt4_response = gpt4_data[1][attr][attr_[que_num+1]]["assistant"]
-                claude_response = claude_data[1][attr][attr_[que_num+1]]["assistant"]
+            
+                question = gemini_data[1][attr][que_num-1]["user"]
+                # assert question == gpt4_data[1][attr][que_idx]["user"], "gpt4 prompt does not match"
+                try: # for India profile < 3
+                    assert question == claude_data[1][attr][que_idx]["user"], "claude prompt does not match"
+                    claude_response = claude_data[1][attr][que_idx]["assistant"]
+                except: # for claude: bangladesh + India profile >=3 
+                    assert question == claude_data[1][attr][que_num-1]["user"],"claude prompt does not match"
+                    claude_response = claude_data[1][attr][que_num-1]["assistant"]
+                # except: # if using model other than claude and gpt4
+                #     assert question == claude_data[attr][que_idx]["user"], "claude prompt does not match"
+                #     claude_response = claude_data[attr][que_idx]["assistant"]
+                gemini_response = gemini_data[1][attr][que_num-1]["assistant"]
+                gpt4_response = gpt4_data[1][attr][que_num-1]["assistant"]
+                # claude_response = claude_data[1][attr][que_idx]["assistant"]
+                
                 try:
-                    Llama3_response = Llama3_data[1][attr][attr_[que_num+1]]["assistant"]
+                    Llama3_response = Llama3_data[1][attr][que_num-1]["assistant"]
                 except TypeError:
-                    Llama3_response = Llama3_data[1][attr][attr_[que_num+1]][0]["assistant"]
+                    Llama3_response = Llama3_data[1][attr][que_num-1][0]["assistant"]
                 except IndexError:
-                    Llama3_response = Llama3_data[1][attr][0][attr_[que_num+1]]["assistant"]
-                mistral_response = mistral_data[1][attr][attr_[que_num+1]]["assistant"]
-                phi_response = phi_data[1][attr][attr_[que_num+1]]["assistant"]
+                    Llama3_response = Llama3_data[1][attr][0][que_num-1]["assistant"]
+                mistral_response = mistral_data[1][attr][que_num-1]["assistant"]
+                phi_response = phi_data[1][attr][que_num-1]["assistant"]
                 
                 # Model
-                df.at[count,"Model"] = "Gpt4"
-                df.at[count+1,"Model"] = "Llama3"
-                df.at[count+2,"Model"] = "Mistral"
-                df.at[count+3,"Model"] = "Claude"
-                df.at[count+4,"Model"] = "Gemini"
-                df.at[count+5,"Model"] = "Phi"
-                df.at[count+6,"."] = "."
+                # df.at[count,"Model"] = "Gpt4"
+                # df.at[count+1,"Model"] = "Llama3"
+                # df.at[count+2,"Model"] = "Mistral"
+                # df.at[count+3,"Model"] = "Claude"
+                # df.at[count+4,"Model"] = "Gemini"
+                # df.at[count+5,"Model"] = "Phi"
+                # df.at[count+6,"."] = "."
                 
                 
                 # User Profile
@@ -147,20 +162,23 @@ def cat(country):
                 
                 
                 count += 7
-            
-       
-        save_path = f"./results/Aggregated_response/{country}_responses.xlsx"
+
+        
+        save_path = f"./results/Aggregated_response/filtered/{country}_filtered_responses_v2.xlsx"
         if os.path.exists(save_path):
             with pd.ExcelWriter(save_path, mode ="a",if_sheet_exists='overlay') as write:
                 df.to_excel(write,sheet_name=f"Profile_{profile_num}")
         else:
             df.to_excel(save_path,sheet_name=f"Profile_{profile_num}",header=True,
                         merge_cells=True)
+    
         
     
 if __name__ == "__main__":
-    cat("Bangladesh")
-    print("done")
+    # cat("USA")
+    cat("India")
+    # cat("Bangladesh")
+    # print("done")
         
                 
                 

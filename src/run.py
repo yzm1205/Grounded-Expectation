@@ -13,15 +13,15 @@ from Model.vllm.vllm_session import VllmSession
 
 parser = ArgumentParser() 
 
-parser.add_argument("-p",dest="profile_num", type = str, help="Set User profile", default="1")
+parser.add_argument("-p",dest="profile_num", type = str, help="Set User profile", default="4")
 
 parser.add_argument("-pt",dest="prompt_type", type = str, help="Select one prompt type from 1) General Questions 2) MCQ", default="general_questions")
 
-parser.add_argument("-m",dest="model_name", type = str, help="Model selection", default="gpt4")
+parser.add_argument("-m",dest="model_name", type = str, help="Model selection", default="claude")
 
 parser.add_argument("-lv",dest="lv", type = str, help="Provide TELer Prompt Level. Select from lv0, lv1, lv2, lv3, lv4", default="4")
 
-parser.add_argument("-pl",dest="profile_location", type = str, help="Profile Location : [USA, India, Bangladesh]", default="USA")
+parser.add_argument("-pl",dest="profile_location", type = str, help="Profile Location : [USA, India, Bangladesh]", default="Bangladesh")
 
 parser.add_argument("-cuda",dest="cuda", type = str, help="Cuda device number", default="1")
 parser.add_argument("-save",dest="save", type = bool, help="save data", default=True)
@@ -71,16 +71,36 @@ elif args.model_name in ["Mistral","mistral"]:
 elif args.model_name in [f"Phi3-min","phi3-min","phi"]:
     model = phi.phi3mini(system_role=system_content,cuda_device=args.cuda)
 
+filtered_list= dict(
+pronouns_ = [1,2,7,8,9],
+political_views_ = [2,4,5,7,9],
+religious_veiws_ = [1,3,5,6,7],
+geolocation_ = [1,2,4,7,10],
+education_level_ = [1,5,6,7,10],
+tech_background_ = [2,3,4,5,7],
+mental_health_ = [1,2,3,4,6],
+accessibility_ = [1,2,3,7,13],
+age_group_ = [1,2,4,5,9],
+financial_status_ = [3,6,7,10,12]
+)
+
+
 
 
 # This code can be used when we want one prompt passed at a time.     
 all_categoiries = list(profile.keys())
 conversation_history = {}
 for cat_idx, category_key in enumerate(all_categoiries):
-    cat_prompts = list(prompts["category"][category_key][args.prompt_type].values())
-    conversation_history[category_key] = []
+    if category_key == "tech background":
+        category_key_ = "tech_background_"
+    else:
+        category_key_ = category_key + "_"
+    # cat_prompts = list(prompts["category"][category_key][args.prompt_type].values()) # to get all prompts
+    cat_prompts = [list(prompts["category"][category_key][args.prompt_type].values())[i-1] for i in filtered_list[category_key_]] # to get filtered_prompts
+    
+    conversation_history[category_key] =[]
+    
     progress_bar = tqdm(total=len(cat_prompts))
-    # progress_bar.set_description(color="green")
 
     for idx,prompt in enumerate(cat_prompts):
         # print(f"\n ###############  profile_{args.profile_num} --- {category_key} --- questions # {idx} ###############\n")
@@ -91,7 +111,7 @@ for cat_idx, category_key in enumerate(all_categoiries):
             progress_bar.update(1)
             # print(f"user:{prompt},assistant: exited")
             break 
-        # print("\nUSER: ", prompt)
+        print("\nUSER: ", prompt)
         try:
             conversation = model.generate_response(prompt)
         except KeyboardInterrupt:
@@ -100,8 +120,9 @@ for cat_idx, category_key in enumerate(all_categoiries):
             conversation = "Error"
             print("There is an error profile_{args.profile_num} --- {category_key} --- question {idx}")
         conversation_history[category_key].append({"user":prompt,"assistant": conversation})
-        # print("\nAssistant: ", conversation)
+        print("\nAssistant: ", conversation)
         progress_bar.update(1)
+
 history.append(conversation_history)
 progress_bar.close()
 
