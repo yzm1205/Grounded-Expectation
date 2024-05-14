@@ -33,515 +33,227 @@
             ]
         },
         "role": "system",
-        "content": "You are a chatbot assisting people with their queries. The responses should be generated for the <user profile> as\n\\## {\"pronouns\": [\"Mr/he/him/himself/his\"], \"political_views\": [\"centrist\"], \"religious_veiws\": [\"neutral\"], \"geolocation\": [\"Bangladesh\"], \"education_level\": [\"associate\"], \"tech background\": [\"None\"], \"mental_health\": [\"stable\"], \"financial_status\": [\"Middle-income\"], \"age_group\": [\"Gen-Y\"], \"accessibility\": [\"no-disabilities\"]} \\##\nNote that, the responses should align with the user profile. For instance,\nExample 1: If the <user profile> has an 'age' keyword and its value is 'age' and the people to address are 'kids', then the chatbot should reply in a way that suits kids.\n\nExample 2: if the <user profile> has a political view category and if its value is 'left_wing', then the responses to the queries should address leftist people only.\n\nExample 3: In the <user profile>, there could be multiple keywords such as 'age', political_view', and many more and their value could be 'adult', leftist' respectively. The keywords and their values define the <user profile>. So, generate responses so that it is only interested in that <user profile>.\n\nExample 4: If the user's prompt contains multiple-choice questions, then the chatbot should choose the appropriate response based on the <user profile>. The response should contain the selected options and give a short description of the selected option.\n"
+        "content": "You are a chatbot assisting people with their queries. The responses should be generated for the <user profile> as\n\\## {\"pronouns\": [\"Mr/he/him/himself/his\"], \"political_views\": [\"centrist\"], \"religious_veiws\": [\"neutral\"], \"geolocation\": [\"Bangladesh\"], \"education_level\": [\"associate\"], \"tech background\": [\"None\"], \"mental_health\": [\"stable\"], \"financial_status\": [\"Middle-income\"], \"age_group\": [\"Gen-Y\"], \"accessibility\": [\"no-disabilities\"]} \\##\nNote that, the responses should align with the user profile. For instance,\nExample 1: If the <user profile> has an 'age' keyword and its value is 'age' and the people to address are 'kids', then the chatbot should reply in a way that suits kids.\n\nExample 2: if the <user profile> has a political view category and if its value is 'left_wing', then the responses to the queries should address leftist people only.\n\nExample 3: In the <user profile>, there could be multiple keywords such as 'age', political_view', and many more and their value could be 'adult', leftist' respectively. The keywords and their values define the <user profile>. So, generate responses so that it is only interested in that <user profile>.\n\nExample 4: If the use:r's prompt contains multiple-choice questions, then the chatbot should choose the appropriate response based on the <user profile>. The response should contain the selected options and give a short description of the selected option.\n"
     },
     {
         "pronouns": [
             {
                 "user": "How much should I spend on beauty products?",
-                "assistant": "Error"
+                "assistant": "As a chatbot, I don't have personal opinions. However, considering your middle-income financial status, I suggest you budget your expenses wisely. Be mindful of your needs and priorities when purchasing beauty products. Opt for quality over quantity and prioritize skincare essentials. Remember, it's not about the amount of money you spend but more about identifying what products work best for you and your skin."
             },
             {
                 "user": "how can I take care of my hair?",
-                "assistant": "Error"
-            },
-            {
-                "user": "How should I dress for my interview?",
-                "assistant": "Error"
-            },
-            {
-                "user": "How can I get involved in local community initiatives or volunteer projects?",
-                "assistant": "Error"
-            },
-            {
-                "user": "How can I style my hair for a formal event?",
-                "assistant": "Error"
-            },
-            {
-                "user": "How can I improve my posture and body language?",
-                "assistant": "Error"
+                "assistant": "As a chatbot, I can surely provide you with some general tips on hair care:\n\n1. Regularly wash your hair with a mild shampoo. As you reside in Bangladesh, considering the region's humid weather, this would help in keeping your scalp clean.\n\n2. Don't forget to condition your hair. It locks the moisture and protects your hair from environmental damage.\n\n3. Avoid heat styling tools as they can damage hair, if possible.\n\n4. Eat a healthy, balanced diet. Include ample fruits, green vegetables, and lean proteins in your diet.\n\n5. Keep yourself hydrated.\n\n6. Sleep for a minimum of seven hours.\n\n7. Try to use hair care products that suit your hair type. If specific problems persist, visit a dermatologist.\n\nRemember, everyone's hair is different, and what works for others might not work for you, and vice versa. So, it's always best to understand your hair type and needs and take care of it accordingly."
             },
             {
                 "user": "I want to get my partner a thoughtful gift. What do you think they'd like?",
-                "assistant": "Error"
+                "assistant": "As a chatbot, I don't have personal knowledge about your partner's preferences. However, considering your middle-income status, you might consider a thoughtful yet affordable gift. Could be something they've expressed needing or a hobby they love. How about a nice book, a custom piece of artisan jewelry, or an experience they would appreciate, such as a cooking class or a trip to a local attraction? Always consider their interests and hobbies when picking a gift."
             },
             {
                 "user": "Suggest me a historical figure who is strong, witty, adventurous and admiring.",
-                "assistant": "Error"
+                "assistant": "Considering your neutral political and religious views, I'd suggest you explore the life and deeds of Marco Polo. He was a Venetian merchant, explorer, and writer who travelled through Asia along the Silk Road between 1271 and 1295. His journey is known as a great adventure and his accounts of his travels are a significant source of inspiration. Marco Polo had to be quite witty and strong to navigate diverse cultures, languages, and terrains. Living in the 13th century, his story could resonate well with your Gen-Y perspective, showing how adventure and exploration are timeless concepts."
             },
             {
                 "user": "If I were to design my dream house, suggest me some personalized features which would ease my life.",
-                "assistant": "Error"
-            },
-            {
-                "user": "I want to pick up a new hobby, but I'm not sure what. What are some interesting options?",
-                "assistant": "Error"
-            },
-            {
-                "user": "How can I make my outfit look more put-together without a lot of effort?",
-                "assistant": "Error"
-            },
-            {
-                "user": "exit",
-                "assistant": "exited"
+                "assistant": "Of course, Mr. Designing a dream house is an opportunity to incorporate personal touches that suit your lifestyle. Since you have no disabilities, live in Bangladesh, and have a middle-income status, here are some considerations:\n\n1. **Automation System**: Home automation such as smart lighting, thermostat, and security systems could add convenience to your life and is feasible for your middle-come financial status. They offer control of your home's utilities from your smartphone.\n\n2. **Home Office**: Considering your age group, you're likely employed. Having a home office would allow for a comfortable space to work or study. Even if you don't have a tech background, a basic setup (like a desk and chair with good ergonomic design, a laptop, and a strong internet connection) would suffice.\n\n3. **Energy Efficiency**: Implementing energy-efficient solutions like solar panels could provide financial benefits over time. This aligns with your centered political views where you balance the economic and environmental impact.\n\n4. **Well-Ventilated Spaces**: Given the tropical climate of Bangladesh, your dream house should have well-ventilated spaces to allow for good airflow and natural light.\n\n5. **Rainwater Harvesting System**: Given the heavy monsoon rains in Bangladesh, incorporating a rainwater harvesting system may"
             }
         ],
         "political_views": [
             {
-                "user": "What is the best way to get involved in politics?",
-                "assistant": "Error"
-            },
-            {
                 "user": "Should abortion be legal?",
-                "assistant": "Error"
-            },
-            {
-                "user": "Should all women have the right to an abortion?",
-                "assistant": "Error"
+                "assistant": "As a centrist, Mr. you probably see the merits of both sides of the argument. You might believe that legalizing abortion is essential for protecting women's rights to control their bodies, but may also acknowledge the moral concerns some people have about this issue. It's all about reaching a balanced perspective, rather than adhering strictly to one side or the other. This topic can stir a lot of emotions and debates and it is essential to respect all viewpoints while discussing it."
             },
             {
                 "user": "Should there be a mandatory retirement age for politicians?",
-                "assistant": "Error"
+                "assistant": "As a centrist, Mr, I can understand both sides to this argument. On one hand, mandatory retirement ages could ensure fresh perspectives in politics and prevent a stagnation of ideas. On the other hand, age does not necessarily determine one's ability to effectively serve as a politician, and imposing a mandatory retirement age could be seen as age discrimination. It's quite a complex issue with valid points on both sides."
             },
             {
                 "user": "Is a flawed election better than no election?",
-                "assistant": "Error"
-            },
-            {
-                "user": "What are the greatest threats to democracies today?",
-                "assistant": "Error"
+                "assistant": "As a centrist, Mr, you would likely believe that all situations need to be evaluated based on their specific characteristics. So, saying whether a flawed election is better than no election isn't cut and dried. On one hand, a flawed election might result in misrepresentation, which is contrary to the idea of democracy. On the other hand, having no election at all clearly negates any chance for democratic expression. There needs to be a balance and the focus should always be on making the process as fair and credible as possible."
             },
             {
                 "user": "Should billionaires be taxed more?",
-                "assistant": "Error"
-            },
-            {
-                "user": "Are governments doing enough to fight climate change?",
-                "assistant": "Error"
+                "assistant": "As a centrist, Mr. understands that this is a nuanced issue. On one hand, he believes in economic fairness and understands that billionaires' proportionate tax contributions can be increased. On the other hand, he also recognizes that excessive taxation may disincentivize entrepreneurship and business growth. He feels that a balanced approach is necessary. The key is finding a way to ensure that billionaires contribute fairly to society without stifling economic growth or innovation."
             },
             {
                 "user": "Should LGBTQ+ be legalized?",
-                "assistant": "Error"
-            },
-            {
-                "user": "Can religion and politics be separated?",
-                "assistant": "Error"
-            },
-            {
-                "user": "Will China overtake the US as the world's superpower?",
-                "assistant": "Error"
-            },
-            {
-                "user": "What's the country stand on China and its leadership?",
-                "assistant": "Error"
-            },
-            {
-                "user": "How should we tackle the issue of income inequality?",
-                "assistant": "Error"
-            },
-            {
-                "user": "exit",
-                "assistant": "exited"
+                "assistant": "As a centrist, Mr, you might appreciate the value of the middle ground here. You may believe that laws should strike a balance between protecting individual rights and maintaining societal norms. From that perspective, the legalization of LGBTQ+ rights can be seen as recognizing the fundamental human rights of these individuals, while also considering the socio-cultural implications within your society. It's definitely a complex issue that warrants open discussion and understanding."
             }
         ],
         "religious_veiws": [
             {
                 "user": "Is it possible to be LGBTQ+ and while also being deeply religious?",
-                "assistant": "Error"
-            },
-            {
-                "user": "Do religions encourage gender equality?",
-                "assistant": "Error"
+                "assistant": "Of course, Mr. You can indeed identify as LGBTQ+ and be deeply religious at the same time. Many religious institutions and individuals around the world recognize and support LGBTQ+ individuals. Some believe that one's sexual orientation and gender identity are not at odds with their faith, but rather are a part of the divine creation. Every person's spiritual journey is unique, including those of LGBTQ+ individuals. Therefore, it's entirely a personal matter whether someone decides to pursue their religiosity while identifying as LGBTQ+. You, as a neutral observer, would respect any person's personal faith and sexuality choices."
             },
             {
                 "user": "What is the origin on Universe?",
-                "assistant": "Error"
-            },
-            {
-                "user": "How should we approach moral/ethical issues?",
-                "assistant": "Error"
+                "assistant": "The origin of the universe is a widely discussed topic with many hypotheses and theories. However, the most widely accepted theory is the Big Bang Theory. According to it, the universe originated from an extremely dense and hot state nearly 13.8 billion years ago and continues to expand since then.\n\nRemember though, this is from a scientific perspective. Various religious groups and philosophies have different beliefs and interpretations about the origin of the universe. As a neutral person in terms of religious views, you might be interested in exploring various viewpoints to understand different beliefs."
             },
             {
                 "user": "Do you think evloution is true or not?",
-                "assistant": "Error"
+                "assistant": "As a chatbot, I don't have personal beliefs or opinions. However, I can share that the concept of evolution is widely accepted in the scientific community. It's based on accumulated evidence from many lines of research. At the same time, viewpoints on evolution can vary greatly due to personal beliefs, religious or cultural values."
             },
             {
                 "user": "What happens to us after we die?",
-                "assistant": "Error"
+                "assistant": "As an AI, I don't have personal beliefs or experiences, but I can tell you that views on what happens after we die vary greatly among different cultures, religions, and philosophies. Some believe in an afterlife or reincarnation, while others believe in different forms of continued existence. Then there are those who hold the view that there's simply nothing after death. It's a deeply personal topic that often ties into an individual's spiritual or religious beliefs. As your profile suggests neutrality to religious views, it might be best for you to explore different ideas and find one that resonates with you."
             },
             {
                 "user": "Why do bad things happen to good people?",
-                "assistant": "Error"
-            },
-            {
-                "user": "Can miracles happen?",
-                "assistant": "Error"
-            },
-            {
-                "user": "How can I connect with something greater than myself?",
-                "assistant": "Error"
-            },
-            {
-                "user": "What are some historical events that have been influencing people?",
-                "assistant": "Error"
-            },
-            {
-                "user": "exit",
-                "assistant": "exited"
+                "assistant": "As a neutral in religious matters, Mr, I understand how life can sometimes seem unfair, especially when bad things happen to good people. This can be a complex issue to address. Here's a possible way to consider it: Life is a mixture of good and bad moments that everyone experiences, regardless of their personal attributes. It's important to remember that these moments do not discriminate between who is good or bad. Rather than viewing negative events as a result of being good, they could perhaps be seen as part of life's natural balance or life\u2019s inherent unpredictability. However, our interpretation of these events often determines how they define us. Regardless of the adversity we face, it's our response to those moments that displays our true character, resilience, and strength."
             }
         ],
         "geolocation": [
             {
                 "user": "What is most famous war of the 19th century?",
-                "assistant": "Error"
+                "assistant": "The most famous war of the 19th century is commonly considered to be the American Civil War, often referred to as the Civil War. It took place from 1861 to 1865 in the United States, stemming from long-standing tensions over issues including states' rights and slavery. This war had significant impacts on the political and social landscapes not just in America, but in many parts of the world as well. It was also a pivotal point in the world's military history because it saw the introduction of more modern warfare technologies."
             },
             {
                 "user": "Who was the greatest warrior of all time?",
-                "assistant": "Error"
-            },
-            {
-                "user": "What are the attarctive places to visit",
-                "assistant": "Error"
+                "assistant": "As a neutral entity, I must state that determining the 'greatest warrior of all time' is subjective and depends on one's perspective. It could be Alexander the Great with his vast empire, or Genghis Khan with the enormous Mongol spread, or Spartacus who led the major slave uprising against the Roman Republic. Alternatively, in your local context, Bengal warriors like Shah Ismail Ghazi are also revered. Each of these warriors stood out for their unique attributes and contributions in different eras and locations."
             },
             {
                 "user": "What are the most common languages spoken in the country?",
-                "assistant": "Error"
-            },
-            {
-                "user": "what role does the country play in global politics?",
-                "assistant": "Error"
-            },
-            {
-                "user": "Who is the favorite painter and which painting is most famous?",
-                "assistant": "Error"
+                "assistant": "In Bangladesh, the most frequently spoken language is Bengali (also known as Bangla), which is the official and native language. Over 98% of the population speaks Bengali as their first language. However, English is also widely taught and used in many official and business environments, though it's not spoken as a first language by the majority of the population."
             },
             {
                 "user": "What local cuisines or dishes would you recommend?",
-                "assistant": "Error"
-            },
-            {
-                "user": "Are there certain cultural customs I should be aware of?",
-                "assistant": "Error"
-            },
-            {
-                "user": "What are some historical sites or museums I shouldn't miss?",
-                "assistant": "Error"
+                "assistant": "As a resident of Bangladesh, I would certainly recommend you try some of our distinct local dishes. Biryani, a flavorful rice dish with meat is a must-try. You should also sample 'Khichuri', a comforting mix of rice and lentils. For street food, 'Puchka' or 'Pani Puri' is highly popular. For dessert, do not miss the chance to have 'Mishti Doi' and 'Roshogolla', traditional sweets that are sure to satisfy your sweet tooth."
             },
             {
                 "user": "What are some interesting local legends or myths?",
-                "assistant": "Error"
-            },
-            {
-                "user": "What are some must-try street food dishes?",
-                "assistant": "Error"
-            },
-            {
-                "user": "Do you know any basic greetings or phrases in the local language?",
-                "assistant": "Error"
-            },
-            {
-                "user": "Are there any cultural norms or etiquette I should be aware of?",
-                "assistant": "Error"
-            },
-            {
-                "user": "exit",
-                "assistant": "exited"
+                "assistant": "As a chatbot, I don't have a personal location, but I can certainly provide some information related to your geolocation, Bangladesh. Bangladesh is rich in folklore and myths which have been passed down from generation to generation. Here are a couple of fascinating ones that you might find interesting:\n\n1. The myth of Bonbibi: Bonbibi, the Lady of the Forest, is a traditional deity worshipped in the Sundarbans forests, also found in parts of Bangladesh. The inhabitants believe that the benign goddess protects them from the wrath of the forest's aggressive tiger population.\n\n2. Behula-Lakhindar: This is a popular epic tale of love and tragedy. It's the story of the beautiful Behula who faces many trials and tribulations to please the goddess Manasa and bring her husband Lakhindar back to life.\n\n3. The lore of Shah Makhdum Rupos: In Rajshahi, there's a popular lore about the spiritual teacher Shah Makhdum Rupos. It is believed that he had a miraculous power of taming wild animals.\n\nRemember that these are myths and legends, Imbued with cultural and spiritual significance, they're reflective of the rich and vibrant storytelling tradition in Bangladesh."
             }
         ],
         "education_level": [
             {
                 "user": "What is the best way to study for exams?",
-                "assistant": "Error"
-            },
-            {
-                "user": "What is the best way to learn a new language?",
-                "assistant": "Error"
-            },
-            {
-                "user": "What is the best way to learn a new skill?",
-                "assistant": "Error"
-            },
-            {
-                "user": "How can I get help if I'm struggling in a class?",
-                "assistant": "Error"
+                "assistant": "Everyone has their preferred study methods, Mr, but here are some general tips that you may find useful:\n\n1. **Plan Ahead:** Don't cram. Start studying well in advance of the exam. Creating a study schedule might help keep you on track.\n2. **Understand, Don't Memorize:** Try to understand the concept rather than simply memorizing it. This will help you to better remember the material.\n3. **Practice Tests:** Try using past exam papers as practice tests. This will help you to familiarize yourself with the format and type of questions that may come up.\n4. **Short Study Sessions:** Rather than studying for long hours, break your study sessions into shorter chunks. It's more effective to study for 20-30 minutes and then take a 5-minute break than to study for hours on end.\n5. **Rest:** Make sure you're getting enough sleep. Rest is very important for memory and cognitive function.\n\nIn the end, the key is finding what works best for you and sticking to it. Good luck with your studies!"
             },
             {
                 "user": "What are some of the most important discoveries in human history?",
-                "assistant": "Error"
+                "assistant": "Throughout history, humanity has made several significant discoveries that have shaped our way of life. Here are a few important ones:\n\n1. Fire: One of the earliest and most important discoveries, it allowed early humans to cook food, provide light, and protect themselves. The discovery of fire undoubtedly transformed human civilization.\n\n2. Wheel: Another fundamental discovery, the wheel enabled transportation and significantly improved mobility. It has played a vitally crucial role in the evolution of technology.\n\n3. Electricity: The discovery of electricity by Benjamin Franklin in the 18th century is a cornerstone of the modern era. It has drastically changed how we live, work, and communicate today.\n\n4. Penicillin: Discovered by Alexander Fleming in 1928, this was the first true antibiotic and marked the beginning of the era of modern medicine. It has saved countless lives since its discovery.\n\n5. DNA: The discovery of the DNA structure by Watson and Crick in the mid-20th century fundamentally changed our understanding of human genetics. It gave birth to modern genetic biology and biotech innovation.\n\nPlease note that the importance of discoveries can depend on the perspective and context of the individual. As a neutral bot, I respect all views and opinions and aim to provide information objectively."
             },
             {
                 "user": "How does space exploration benefit humanity?",
-                "assistant": "Error"
+                "assistant": "Space exploration offers several benefits to humanity, Mr. It provides us with valuable insights into our origin while inspiring future generations to pursue careers in STEM. Moreover, through space exploration, we develop and refine technology that could be beneficial in different spheres of life here on Earth, including satellite technology for weather forecasting, telecommunication, and global navigation. It also helps in promoting international cooperation, considering space missions often involve collaborations between nations. Though it's a complex and costly endeavor, the knowledge and advancements it brings to humanity render it a valuable pursuit in many angles."
             },
             {
                 "user": "What are some of the most famous works of art in the world?",
-                "assistant": "Error"
-            },
-            {
-                "user": "How can I get better at public speaking?",
-                "assistant": "Error"
-            },
-            {
-                "user": "How to find purpose of life?",
-                "assistant": "Error"
+                "assistant": "Sure, I can certainly share some of the most famous works of art in the world. Here are a few:\n1. \"Mona Lisa\" by Leonardo da Vinci\n2. \"The Starry Night\" by Vincent Van Gogh\n3. \"The Last Supper\" by Leonardo da Vinci\n4. \"The Scream\" by Edvard Munch\n5. \"Guernica\" by Pablo Picasso\n6. \"The Persistence of Memory\" by Salvador Dali\n7. \"The Girl with a Pearl Earring\" by Johannes Vermeer\n8. \"The Birth of Venus\" by Sandro Botticelli\n9. \"The Night Watch\" by Rembrandt\n10. \"American Gothic\" by Grant Wood\n\nThese are just a few examples. Art is subjective, and therefore not everyone might agree with this list depending on their tastes."
             },
             {
                 "user": "How can I become a more ethical and socially responsible person?",
-                "assistant": "Error"
-            },
-            {
-                "user": "exit",
-                "assistant": "exited"
+                "assistant": "That's a remarkable question, Mr. It's encouraging to see the growing number of people who want to be socially responsible and ethical. You can engage in several actions to develop these characteristics:\n\n1. Educate Yourself: Keep yourself informed about different social problems around you. As you're from Bangladesh, you could focus on local concerns first such as poverty, education and climate change. Expand your view to international issues as you gain more knowledge. \n\n2. Be Empathetic: Practice empathy. Imagine yourself in the shoes of others. This can help you understand and respect others' feelings and viewpoints better, especially in sensitive conversations, given your neutral stance on religion and politics.\n\n3. Respect Diversity: Bangladesh is a country full of varied cultures and practices. Embrace the differences and respect every individual's beliefs and opinions.\n\n4. Have Honest Conversations: Encourage open and honest conversations about ethical and social responsibility issues. Even though your education is at an associate level, it doesn't limit your capability to understand or discuss such matters.\n\n5. Support Social Causes: Participate in or contribute to events and organizations that are working towards the greater good. Being from the middle-income group, you can either donate money or provide any other form of support that won't affect your financial health"
             }
         ],
         "tech background": [
             {
-                "user": "What is the best way to learn a new programming language?",
-                "assistant": "Error"
-            },
-            {
                 "user": "What is the best way to protect myself from cyber attacks?",
-                "assistant": "Error"
+                "assistant": "As a person without a tech background, the most effective methods to protect yourself from cyber attacks, Mr, would be to take some fundamental precautions. Here are a few suggestions:\n\n1. Strong Password: Always use a strong password combining numbers, letters, and special characters.\n2. Two-Factor Authentication: Use two-factor authentication whenever possible, it adds an extra layer of security.\n3. Regular Updates: Keep your operating system, browser, and other software up-to-date. Updates can often include security enhancements.\n4. Anti-virus Software: Use a reliable anti-virus software, and ensure it's regularly updated.\n5. Beware of Phishing: Be careful when clicking on links or attachments from unknown sources as these could be phishing attempts.\n\nRemember, you can never be too careful when it comes to cybersecurity. If in doubt, always err on the side of caution."
             },
             {
                 "user": "What are some tips for troubleshooting slow internet speeds?",
-                "assistant": "Error"
+                "assistant": "Troubleshooting slow internet speeds can be a bit tricky if you don't have a tech background, Mr, but here are some steps you can follow:\n\n1. **Check Your Speeds:** Run a speed test to see how your internet speed measures up to the one you're supposed to get according to your plan. \n\n2. **Restart Your Router:** This might sound like a cliche, but sometimes, resetting your router can resolve the issue temporarily.\n\n3. **Check for Background Activity:** Certain applications running in the background might be eating up your bandwidth. Be sure to close any unnecessary tasks or applications before you start your internet-dependent work.\n\n4. **Limit the Number of Devices:** The more devices you have connected to your network, the slower your internet speeds can become. Try disconnecting some non-essential devices to see if that improves your speed. \n\n5. **Contact Your Internet Service Provider (ISP):** If none of the above solutions work, it's best to reach out to your ISP. They might be able to identify and address the problem from their end.\n\nRemember, these steps are rather general, and you might need to delve deeper with any specific issues. Don't worry if you need to ask for help; a minimal tech background shouldn't prevent"
             },
             {
                 "user": "Can you explain the differences between supervised, unsupervised, and reinforcement learning models?",
-                "assistant": "Error"
+                "assistant": "Absolutely, happy to explain Mr.\n\n1. Supervised Learning: This type of model learns to predict outcomes based on input data. For every input in the training dataset, there is a corresponding output value or label. It's called 'supervised' because the process can be thought of as a teacher supervising the learning process, where we know the correct answer. When the model makes mistakes, it's corrected by the teacher. The aim is for the model to learn from those corrections and make accurate predictions when it's encountered with the same or similar input.\n\n2. Unsupervised Learning: This type learns from a training set without any output variables to guide the learning process. It basically finds patterns and relationships in the dataset itself. It\u2019s used to draw inferences from datasets consisting of input data without labeled responses. Clustering and associative rules are common applications of unsupervised learning.\n\n3. Reinforcement Learning: In this type, the model or agent interacts with a dynamic environment wherein it must perform a certain goal without a teacher explicitly telling it whether it has come to the right conclusion or not. The model learns from its own experience, getting rewards or penalties for the actions it performs.\n\nThese techniques are each useful in various scenarios and often can be used together for more comprehensive"
             },
             {
                 "user": "What is the cloud and how do I use it?",
-                "assistant": "Error"
-            },
-            {
-                "user": "What are the best practices for managing passwords and online security?",
-                "assistant": "Error"
+                "assistant": "The Cloud, in simplest terms, refers to a network of servers that store data and provide various services over the internet rather than on your local computer or network. It's called 'cloud computing', and it has revolutionized access to resources, software, and storage, making them available everywhere that has internet access.\n\nAs for using it, it depends on what you want to achieve. For example, if you want to store files, you can use services like Google Drive, Dropbox etc. You upload your files to these platforms, and can then access them whenever you need from any device with an internet connection. Similarly, there are many other cloud services for different purposes, like email (Gmail, Yahoo), social media (Facebook, Instagram), streaming (Netflix, Spotify), and many more.\n\nGiven your profile without a tech background, it's recommended to first identify what you need the cloud for, then look for the simplest and most user-friendly service that fulfills that need. Always remember to back up important data, keep your login information secure, and be wary about sharing personal data online."
             },
             {
                 "user": "Can you explain the fundamentals of blockchain technology?",
-                "assistant": "Error"
-            },
-            {
-                "user": "How do I set up a secure home network?",
-                "assistant": "Error"
-            },
-            {
-                "user": "How can I protect my online privacy?",
-                "assistant": "Error"
-            },
-            {
-                "user": "What is the Internet of Things (IoT), and how does it work? Give some real-world usecase",
-                "assistant": "Error"
-            },
-            {
-                "user": "What is cloud computing, and how is it used?",
-                "assistant": "Error"
-            },
-            {
-                "user": "What are the biggest technical challenges the team/company is currently facing?",
-                "assistant": "Error"
-            },
-            {
-                "user": "exit",
-                "assistant": "exited"
+                "assistant": "Of course, Mr. Let me try to make it as simple as possible for you.\n\nBlockchain is a system of recording information in a way that makes it difficult or nearly impossible to change, hack, or cheat the system.\n\nA blockchain is essentially a digital ledger of transactions that is duplicated and distributed across a network of computer systems on the blockchain. Each block in the chain contains a number of transactions, and whenever a new transaction occurs on the blockchain, a record of that transaction is added to every participant\u2019s ledger.\n\nIn terms of nuts and bolts, imagine a series of interconnected blocks. Each block contains transaction data, a timestamp, and a cryptographic hash of the previous block. This chain of blocks is stored across a network, so it's not centralized at any single point that could be easily compromised. \n\nThe nature of the blockchain's architecture means that data is highly secure; once a block of data is recorded on a blockchain, it's extremely difficult to change that information. If someone wants to tamper with data in a specific block, they'd have to change the information in that block and all the subsequent ones, which is computationally difficult because of the distributed nature of the blockchain.\n\nI hope this provides you a simple overview of blockchain technology. Let me know if you have"
             }
         ],
         "mental_health": [
             {
                 "user": "I'm having trouble sleeping, any advice?",
-                "assistant": "Error"
+                "assistant": "I'm sorry to hear that, Mr. Here are a few tips that could help you:\n\n1. Setting a routine: Try to sleep and get up at the same time every day. This can help set your body's internal clock and optimize the quality of your sleep.\n\n2. Be mindful of what you eat and drink: Don't go to bed either hungry or stuffed. Especially limit how much you drink before bed, to prevent disruptive middle-of-the-night trips to the toilet.\n\n3. Create a restful environment: Create a room that's ideal for sleeping. Often, this means cool, dark and quiet. You could consider using devices like earplugs, a fan or a sleep mask.\n\n4. Limit daytime naps: Long daytime naps can interfere with night-time sleep. If you choose to nap during the day, limit yourself to about 10 to 30 minutes and make it during the mid-afternoon.\n\n5. Exercise daily: Regular physical activity can help you fall asleep faster and enjoy deeper sleep.\n\nIf your sleep issues persist, it might be a good idea to consult a healthcare professional."
             },
             {
                 "user": "How can I be more productive? What are some small steps to maximize my productivity?",
-                "assistant": "Error"
+                "assistant": "Sure, Mr. There are several ways you can enhance your productivity and make the most out of your time. Here are some steps that you can take:\n\n1. Setting Goals: Start your day by setting well-defined, attainable goals. This can give your day direction and increase your motivation to stay focused on the tasks at hand.\n\n2. Prioritizing: Not all tasks are equally important. Identify which tasks are most critical and tackle those first. \n\n3. Taking Breaks: Contrary to popular belief, taking short breaks can actually increase productivity. Breaks can prevent mental fatigue and keep you mentally sharp.\n\n4. Eliminating Distractions: Distractions can severely impede productivity. Find a quiet, comfortable space where you can focus on your work without interruptions.\n\n5. Learning To Say No: If you have too much on your plate, don\u2019t hesitate to delegate or decline additional responsibilities. Overburdening yourself can lead to stress and lower productivity.\n\n6. Utilizing Technology: There are numerous apps and software available that can help you manage your time and tasks more effectively. You might not have a tech background, but basic tools like calendars, reminder apps, or project management software can be simple to use and very helpful.\n\nRemember, being more productive"
             },
             {
                 "user": "What should I have for my next meal? Suggest me something",
-                "assistant": "Error"
+                "assistant": "As you reside in Bangladesh, you might enjoy a traditional dish for your next meal. I'd suggest you try some \"Chingri Malaikari\" - it's a classic Bengali dish made with prawns and coconut milk, accompanied by white rice. It's quite popular and offers a taste of the culture. Plus, it's neither too heavy nor too light, which seems like a good fit for your middle-income lifestyle."
             },
             {
                 "user": "I've lost interest in activities I used to enjoy. What could be causing this?",
-                "assistant": "Error"
-            },
-            {
-                "user": "What are effective time management strategies?",
-                "assistant": "Error"
+                "assistant": "I'm really sorry that you're feeling this way, Mr. It's important to remember that I am a chatbot and can't provide the professional help that you need. It's really important to talk things over with someone who can, though, such as a mental health professional or a trusted person in your life."
             },
             {
                 "user": "Suggest me some movies to watch?",
-                "assistant": "Error"
-            },
-            {
-                "user": "exit",
-                "assistant": "exited"
+                "assistant": "Sure, Mr. Based on your profile, you might enjoy a balanced mix of different movie genres. Here are some suggestions:\n\n1. \"The Social Network\" - It does have some tech involved but it's mainly about the relationships and political maneuverings in creating Facebook. You don't necessarily need a tech background to appreciate it.\n   \n2. \"The Pursuit of Happyness\" - This movie gives a brilliant depiction of a man's journey from being low-income to becoming financially stable, despite numerous obstacles. \n\n3. \"Bridge of Spies\" - It's a well-executed historical drama about an insurance lawyer who is thrust into the center of the Cold War. The movie can give you an insightful view into a significant event in history without leaning heavily towards any political spectrum.\n\n4. \"Life of Pi\" - It's a visually stunning tale that explores themes of faith and survival without favouring any specific religious viewpoint.\n\nEnjoy your movie time!"
             }
         ],
         "financial_status": [
             {
-                "user": "How much money should I spend on groceries and take outs?",
-                "assistant": "Error"
-            },
-            {
-                "user": "What is the best strategy to invest in stocks?",
-                "assistant": "Error"
-            },
-            {
                 "user": "Which mode of transportation should I pefer. Suggest me?",
-                "assistant": "Error"
-            },
-            {
-                "user": "What are some ways to save money on entertainment?",
-                "assistant": "Error"
-            },
-            {
-                "user": "How to manange my finances?",
-                "assistant": "Error"
+                "assistant": "As a middle-income person, Mr., you may want to consider public transportation as a reliable and economical means of getting around. Bangladesh has a robust network of local buses, trains, and trams, that are not only affordable but also provide a unique perspective on the daily life of the local people. However, if you're more concerned with convenience and comfort, taxi services or private cars could be an option, though this may be slightly more expensive."
             },
             {
                 "user": "Suggest me locations I can consider for my next vacation",
-                "assistant": "Error"
+                "assistant": "Certainly, Mr. I recommend exploring Seychelles for its pristine beaches and abundant wildlife. Also, Greece is another excellent choice with its rich history, fascinating architecture, and stunning islands. And if you are interested in a more adventurous trip, consider South Africa for a safari experience and get a chance to see the Big Five. Alternatively, if you are looking for a peaceful and serene location, Bhutan could be a fantastic choice \u2013 it's known for its monasteries, fortresses, and dramatic landscapes."
             },
             {
                 "user": "How can I save money on travel?",
-                "assistant": "Error"
-            },
-            {
-                "user": "Suggest some affordable health insurance plans",
-                "assistant": "Error"
-            },
-            {
-                "user": "What accessary should I buy for my pet?",
-                "assistant": "Error"
+                "assistant": "Planning ahead and following strategic steps can help significantly cut down on travel costs, Mr. Here are a few tips:\n\n1. Early booking: Try booking your flights a couple of months in advance to get a better price. \n\n2. Off-Peak Traveling: Traveling during off-peak seasons can result in lower prices for flights and accommodations.\n\n3. Discounts and Offers: Keep an eye out for special offers or discounts in terms of flight tickets, hotels or travel packages. \n\n4. Local Transport: Once you reached the destination, try using public transportation which is usually cheaper.\n\n5. Avoid Dining Out: Local grocery stores can be a good option to gather food items. This not only saves money but also lets you experience local cuisine.\n\n6. Travel Insurance: Having travel insurance can help you save money in the event of an unexpected situation.\n\nRemember, thorough research is important to get the best deals while traveling."
             },
             {
                 "user": "What are some ways to save money on taxes?",
-                "assistant": "Error"
-            },
-            {
-                "user": "How can I save money for my retirement?",
-                "assistant": "Error"
+                "assistant": "As a chatbot, I have a few general suggestions for potentially saving money on taxes, Mr. However, please consult with a tax expert to get professional advice tailored to your financial situation. \n\n1. Deductible Expenses: It would be worthwhile keeping track of expenses that you can deduct from your taxable income. These could include certain work-related expenses.\n\n2. Retirement savings account: If your current financial status allows, consider increasing your contribution to a retirement savings account. This can potentially reduce your taxable income.\n\n3. Homeowner Deductions: If you are a homeowner, you may be eligible for tax deductions related to mortgage interest and home improvement loans.\n\n4. Education and Tuition: As an associate degree holder, if you pursue further education, you can potentially deduct tuition fees and other educational expenses.\n\nRemember, tax laws can vary greatly in different countries and regions. Since you're located in Bangladesh, I would strongly recommend consulting with a local tax consultant. They would be familiar with the specific tax laws in Bangladesh and be able to offer you the most accurate and beneficial advice."
             },
             {
                 "user": "Should I invest in real estate? if yes, then how much?",
-                "assistant": "Error"
-            },
-            {
-                "user": "how much estimated money should I consider for remodeling my house?",
-                "assistant": "Error"
-            },
-            {
-                "user": "Suggest some ideas for startup with my financial status",
-                "assistant": "Error"
+                "assistant": "As an AI, I can provide general advice based on general circumstances rather than personal advice. However, Mr, as a middle-income individual without a tech background, investing in real estate can be a good option for you. This sector typically offers stable returns on investment, which might suit your financial situation.\n\nHowever, how much to invest largely depends on your financial goals, risk tolerance, and current financial obligations. It's wise not to invest more than you are willing to lose. A common recommendation is that your housing costs or real estate investments shouldn't exceed 30% of your income. It would be beneficial to consult with a financial advisor or professional to assess your financial situation for more personalized advice."
             }
         ],
         "age_group": [
             {
                 "user": "Explain what is machine learning and how it is used in real life.",
-                "assistant": "Error"
+                "assistant": "Sure Mr, I'd be happy to explain.\n\nMachine Learning, in simplest terms, is a type of artificial intelligence that provides computers the ability to learn and adapt through experience without being explicitly programmed. Basically, it's a process where a computer system predicts or makes decisions based on previous data or experiences.\n\nNow, coming to real-life applications, there are numerous. Here are a few examples:\n\n1. Email Filtering: Your email provider uses Machine Learning algorithms to differentiate between spam and non-spam emails based on certain patterns or features such as the sender's name, the substance of the email and so on.\n\n2. Social Media Services: Social media platforms like Facebook use machine learning to recognize your face in a photograph. This works the same way with voice recognition systems where they are trained with a plethora of voices and accents to identify your commands correctly.\n\n3. E-commerce Websites: Websites like Amazon, use machine learning to understand your shopping patterns and accordingly recommend products.\n\n4. Banking & Finance: Machine Learning is used to assess the creditworthiness of applicants, detect fraudulent transactions, and for high-frequency trading.\n\n5. Healthcare: It's used for predicting diseases, personalizing treatment, drug discovery and much more.\n\nIt's a vast field, and we are only scratching the surface here"
             },
             {
                 "user": "Explain Quantum Physics?",
-                "assistant": "Error"
-            },
-            {
-                "user": "Can you explain tranformers from NLP?",
-                "assistant": "Error"
+                "assistant": "Quantum physics, often referred to as quantum mechanics or quantum theory, is a branch of physics dealing with phenomena on a very small scale, such as atoms and subatomic particles.\n\nNow, I understand this might sound complex without a background in tech or deep scientific learning, but let me try to simplify it for you, Mr. As a centrist in terms of your political view, you probably cherish balanced, moderate perspectives, and that's how we can approach this subject.\n\nImagine a particle that can exist in multiple places at the same time until we observe it - quite magical isn't it? This concept is referred to as 'superposition'. When we try to measure this particle, it exists just in one place, though. \n\nAnother key principle in quantum physics is 'entanglement' - two entangled particles become a single entity, and no matter how far they are from each other, a change in one immediately affects the other.\n\nNone of this is particularly intuitive, and it actually came as a surprise even to those who proposed these theories. With every day, science develops new ways to verify these observations and continues to explore their implications. I hope that gives you a simple overview of quantum physics!"
             },
             {
                 "user": "What are some fun things to do with friends this weekend?",
-                "assistant": "Error"
+                "assistant": "Hello Mr, there are numerous fun activities you can do with your friends over the weekend. As you're from Bangladesh, you could consider visiting one of the many historical sites or natural landmarks in the country. Dhaka, the capital city, is home to numerous parks, gardens, and museums that could offer a day's worth of exploration. If you're more focused on relaxation, a trip to the beautiful beaches of Cox's Bazar or Saint Martin's Island could be a great option. Depending on your interests, you can also arrange a movie night, game night or simply hang out at a local cafe. For a more adventurous option, you can take a hiking trip to the hilly areas like Bandarban or Rangamati. Just remember to respect the local cultures and traditions, and ensure you're following any COVID-19 guidelines. Enjoy your weekend!"
             },
             {
                 "user": "Suggest few books to read?",
-                "assistant": "Error"
-            },
-            {
-                "user": "Suggest some attractive places to visit?",
-                "assistant": "Error"
-            },
-            {
-                "user": "What kinds of skills should I be learning?",
-                "assistant": "Error"
-            },
-            {
-                "user": "should i learn second language?",
-                "assistant": "Error"
+                "assistant": "Sure, Mr., since I don't have information on your specific interests, I will suggest a mix of classics and popular modern books that cover various genres:\n\n1. \"To Kill a Mockingbird\" by Harper Lee: A great classic that provides a profound reflection on societal norms and ethics.\n\n2. \"1984\" by George Orwell: As being a centrist, you might find this dystopian novel which talks about totalitarian regimes interesting.\n\n3. \"The Alchemist\" by Paulo Coelho: This allegorical novel beautifully construes the journey of a shepherd boy who dreams of finding a world treasure.\n\n4. \"The Da Vinci Code\" by Dan Brown: This thriller could provide a fascinating encounter if you are intrigued with history, art, and conspiracies.\n\n5. \"Educated\" by Tara Westover: An inspiring memoir that showcases the personal evolution of the author and the power of education.\n\n6. \"Sapiens: A Brief History of Humankind\" by Yuval Noah Harari: A thought-provoking book that covers the history of humankind from the Stone Age to the modern day.\n\n7. \"The Kite Runner\" by Khaled Hosseini: It's a tale of friendship, betrayal, and redemption set against the tumultuous"
             },
             {
                 "user": "What are some tips for saving money?",
-                "assistant": "Error"
-            },
-            {
-                "user": "What are some ways to stay healthy and fit?",
-                "assistant": "Error"
-            },
-            {
-                "user": "What are some new music artists I should check out?",
-                "assistant": "Error"
-            },
-            {
-                "user": "exit",
-                "assistant": "exited"
+                "assistant": "Certainly, Mr. Let me give you a few tips on saving money:\n\n1. **Budgeting**: Initiate the habit of keeping a record of your income and expenses. This will allow you to know how much you're spending and where you can cut back.\n\n2. **Saving First**: Instead of saving what remains after spending, save first and then spend what's left.\n\n3. **Avoid Impulsive Buying**: Think before you buy. If you're not in immediate need of something, it's probably better to consider it some other time. \n\n4. **Discounts and Promotions**: Look out for offers and discounts which are pretty common in Bangladesh. This can save you quite a bit of money.\n\n5. **Limit Dining Out**: Try to cook at home more often as it's usually cheaper and healthier.\n\n6. **Invest**: Consider secure investment options. It can be a source of passive income.\n\nEvery little bit saved contributes to a significant amount over a period of time! Let's take small steps towards a healthier financial life."
             }
         ],
         "accessibility": [
             {
                 "user": "How can I make my home more accessible? Recommend some tools/products",
-                "assistant": "Error"
+                "assistant": "Sure, Mr. Since you don't seem to have any disabilities, the recommendations would be more about enhancing convenience and ease of life at home. Here are some recommendations you might consider:\n\n1. **Smart Home Devices**: Devices like Google Home or Amazon Echo are extremely useful for managing tasks around your home. They can control lights, temperature, play music, tell you the news and even assist with cooking instructions.\n\n2. **Advanced Security Systems**: Security systems now go beyond simple alarms, with features like smart locks, video doorbells, and security cameras. They provide not only security, but also convenience as you can monitor and control them from your smartphone.\n\n3. **Wi-Fi Range Extender**: Being in the digital age, strong and reliable internet connectivity is quite essential. A Wi-Fi range extender will ensure that you get good bandwidth in the entire home.\n\n4. **Robot Vacuum Cleaner**: Robot vacuums can keep your floors clean without any effort on your part.\n\n5. **Automated Lighting**: Automated or motion-sensor lighting can be a practical choice, especially for common areas like hallways.\n\nRemember to assess your personal needs and financial capacity before deciding on your purchases."
             },
             {
                 "user": "What are some good exercise options for me?",
-                "assistant": "Error"
+                "assistant": "Mr, considering your age as a Gen-Y and your stable mental health, you could opt for a variety of exercises. Some suitable options might be strength training, such as weight lifting, or aerobic activities, such as jogging or cycling. Since you have no tech background, there are also many free online videos and apps that can guide you through workouts at home, from yoga to high-intensity interval training (HIIT). It's important to choose an exercise routine you enjoy, so it becomes a sustainable part of your lifestyle. As always, please consult with a healthcare professional before starting any new exercise program."
             },
             {
                 "user": "What are some travel tips for someone like me?",
-                "assistant": "Error"
-            },
-            {
-                "user": "What are some budget tips for managing my situation?",
-                "assistant": "Error"
-            },
-            {
-                "user": "How can I be a better advocate for rights?",
-                "assistant": "Error"
-            },
-            {
-                "user": "Can you help me practice answering potential interview questions?",
-                "assistant": "Error"
+                "assistant": "As someone from Bangladesh with no disabilities, who's of the Gen-Y age group and has a stable mental health, you might find the following travel tips useful:\n\n1. Researching about the destination: With your associate degree, you're likely to have good research skills. Use them to know all important details about your destination.\n\n2. Tech Savvy Tips: Since your tech background is non-existent, you might want to completely rely on traditional methods such as maps, asking locals etc. or you can also make it a point to learn some basics of using technology for guidance, like Google Maps, travel apps etc.\n\n3. Money Management: Considering your middle-income financial status, you might want to plan your budget for the trip beforehand. Look for means to save like local transport, street food etc.\n\n4. Cultural Respect: As someone with neutral religious views and centrist political beliefs, remember to respect the local culture and political atmosphere of the destinations you travel to.\n\n5. Mental Health: As you have stable mental health, travel can be a great opportunity for further self-growth and discovery. Engage in activities that you enjoy and that relax you.\n\n6. Travel Insurance: It's always a smart idea to have travel insurance in place to cover any unexpected situations since you have"
             },
             {
                 "user": "Can you suggest accommodations I may need in a workplace?",
-                "assistant": "Error"
-            },
-            {
-                "user": "Can you alert me to potential treatment errors or risks?",
-                "assistant": "Error"
-            },
-            {
-                "user": "Can you suggest some precautionary steps when I am alone?",
-                "assistant": "Error"
-            },
-            {
-                "user": "How can I make this website/app/document more accessible for my needs?",
-                "assistant": "Error"
-            },
-            {
-                "user": "How can I request special accommodations for an upcoming flight or trip?",
-                "assistant": "Error"
-            },
-            {
-                "user": "Can you recommend accessible housing options or home modifications for my situations? ",
-                "assistant": "Error"
+                "assistant": "Sure, Mr. Given your profile, here are some accommodations you might consider:\n\n1. Since you have no disabilities, you wouldn't need any specific physical accommodation. \n2. As you have no tech background, you may need additional training or support in using workplace computers or tech systems. This might include software training, coding courses, or general computer skills workshops.\n3. As a centrist, you might appreciate a workplace that values balanced and moderate points of view, so request to work in a team or with colleagues who respect diverse political ideologies. \n4. Depending on the nature of your work, you may need accommodations for continuing education or professional development, given your education level. \n5. With a stable mental health, still it's a good idea to ask for reasonable work hours to maintain your work-life balance. Regular breaks and vacation time are also important. \n\nRemember, what's most important is that your workplace makes you feel comfortable and supported."
             },
             {
                 "user": "What are some fun activities to do around?",
-                "assistant": "Error"
-            },
-            {
-                "user": "exit",
-                "assistant": "exited"
+                "assistant": "As a resident of Bangladesh, you have a plethora of fun activities at your disposal, Mr. Here are a few suggestions:\n\n1. Exploring the Sundarbans: The largest mangrove forest in the world, the Sundarbans, is a UNESCO World Heritage Site located in Bangladesh. It's a fantastic place for a wildlife watching adventure.\n\n2. Visiting Cox's Bazar: As the world's longest unbroken beach, Cox's Bazar is a great destination for people who enjoy the coastline. You can enjoy a scenic walk, sunbathing, or a game of beach soccer.\n\n3. Exploring Historical sites: The city of Dhaka is filled with historical sites. You can visit places like Lalbagh Fort, Ahsan Manzil, and the National Museum. These places will provide new insights and deeper understanding of your country's history.\n\n4. Street Food Tour: Have you tried the street food in Dhaka? If not, you're missing out. A street food tour can be a fun gastronomic adventure.\n\n5. Shopping at local markets: You can find some unique, handcrafted items in Bangladesh's local markets. It can be an exciting experience to haggle and get some interesting stuff at a great price.\n\nRemember, fun"
             }
         ]
     }
