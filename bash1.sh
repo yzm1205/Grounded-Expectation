@@ -10,7 +10,7 @@ USA(){
 
 India(){
     for i in {0..21}; do
-    python src/run.py -p $i -m gpt4 -pl India -save True
+    python src/run.py -p $i -m claude -pl India -save True
     done
 }
 
@@ -20,11 +20,11 @@ Bangladesh(){
     done
 }
 
-echo "USA Profile Running"
-USA 
+# echo "USA Profile Running"
+# USA 
 
-echo "India Profile Running"
-India 
+# echo "India Profile Running"
+# India 
 
 echo "Bangladesh Profile Running"
 Bangladesh 

@@ -9,7 +9,7 @@ USA(){
 }
 
 India(){
-    for i in {0..21}; do
+    for i in {4..21}; do
     python src/run.py -p $i -m claude -pl India -save True
     done
 }
@@ -23,8 +23,8 @@ Bangladesh(){
 # echo "USA Profile Running"
 # USA 
 
-# echo "India Profile Running"
-# India 
+echo "India Profile Running"
+India 
 
-echo "Banglaesh Profile Running"
-Bangladesh 
+# echo "Banglaesh Profile Running"
+# Bangladesh 
