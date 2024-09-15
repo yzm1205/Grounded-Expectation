@@ -8,11 +8,11 @@ load_dotenv(dotenv_path="./src/.env")
 helper  ="https://ai.google.dev/tutorials/python_quickstart"
 
 class GeminiModel:
-    def __init__(self,system_role,model = "gemini-pro"):
+    def __init__(self,system_role,model_name = "gemini-pro"):
         genai.configure(api_key=os.getenv("gemini_key"))
-        self.model = genai.GenerativeModel(model)
+        self.model = genai.GenerativeModel(model_name)
         self.sys_role = system_role
-        print(f"Gemini-{model}")
+        print(f"Gemini-{model_name} model is loaded successfully")
 
     def generate_response(self,prompt):
         response = self.model.generate_content(self.sys_role + prompt,

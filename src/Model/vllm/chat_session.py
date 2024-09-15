@@ -2,10 +2,8 @@ import torch
 from typing import List
 import sys
 sys.path.insert(0,"/home/yash/Grounded-Expectation/src/")
-from myutils import (
-    display
-)
-
+from myutils import display
+# src/myutils
 
 class ChatSession:
     """

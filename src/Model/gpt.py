@@ -18,7 +18,7 @@ class GPTModel:
         print()
         
 
-    def generate_response(self, prompt, max_tokens=256, temperature=1, top_p=1.0):
+    def generate_response(self, prompt, max_tokens=2048, temperature=1, top_p=1.0):
         """
         Generate text using the GPT-3 model.
 
@@ -34,15 +34,25 @@ class GPTModel:
         """
         response = self.client.chat.completions.create(
             model=self.model_name,
-            messages=[{"role": "system", 
-                    "content": self.sys_role},
+            messages=[{
+                    "role": "system", 
+                    "content":[{
+                        "type":"text",
+                        "text":self.sys_role}]
+                    },
                     {"role":"user",
-                    "content": prompt}],
+                    "content": [{
+                        "type":"text",
+                        "text":prompt}]
+                    }],
             max_tokens=max_tokens,
             temperature=temperature,
             top_p=top_p,
             frequency_penalty=0,
-            presence_penalty=0
+            presence_penalty=0,
+            response_format={
+    "type": "text"
+  }
         )
 
         return response.choices[0].message.content
