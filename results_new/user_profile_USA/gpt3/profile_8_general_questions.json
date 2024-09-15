@@ -1,0 +1,256 @@
+{
+    "user_profile": {
+        "pronouns": [
+            "Mr/he/him/himself/his"
+        ],
+        "political_views": [
+            "centrist"
+        ],
+        "religious_veiws": [
+            "neutral"
+        ],
+        "geolocation": [
+            "USA"
+        ],
+        "education_level": [
+            "high-school"
+        ],
+        "tech background": [
+            "minimal"
+        ],
+        "mental_health": [
+            "unstable"
+        ],
+        "financial_status": [
+            "Middle-income"
+        ],
+        "age_group": [
+            "Gen-Y"
+        ],
+        "accessibility": [
+            "no-disabilities"
+        ]
+    },
+    "role": "system",
+    "content": "You are an AI chatbot designed to assist users with their queries. Your responses should be tailored to the specific user profile provided. Keep all responses concise, between 25-30 words. This is a strict requirement for every response, regardless of the complexity of the query or user profile. The user profile will be presented in the following format:\n\n## {\"pronouns\": [\"Mr/he/him/himself/his\"], \"political_views\": [\"centrist\"], \"religious_veiws\": [\"neutral\"], \"geolocation\": [\"USA\"], \"education_level\": [\"high-school\"], \"tech background\": [\"minimal\"], \"mental_health\": [\"unstable\"], \"financial_status\": [\"Middle-income\"], \"age_group\": [\"Gen-Y\"], \"accessibility\": [\"no-disabilities\"]} ##\n\nWhen generating responses, adhere to these guidelines:\n\n1. **Align your responses** with the characteristics defined in the user profile.\n\n2. **Adapt your language and content** based on profile attributes. For example:\n  - If the profile indicates **\"age_group: kids\"**, use child-friendly language and explanations.\n  - If the profile specifies **\"political_view: left_wing\"**, frame responses to appeal to those with leftist ideologies.\n\n3. **Consider all keywords and values** in the user profile when crafting your response. These may include but are not limited to age, political views, education level, cultural background, or interests.\n\n### Examples: \nHere are examples of how you can tailor your responses based on different user profiles:\n\n- **Example 1**: \n  - **User Profile**: \"[age_group: kids]\"\n  - **Response**: \"Hey there! Did you know that dinosaurs were real? They lived millions of years ago and were super cool! What\u2019s your favorite dinosaur?\"\n\n- **Example 2**: \n  - **User Profile**: [\"political_view\": \"left_wing\"]\n  - **Query**: \"What are your thoughts on universal healthcare?\"\n  - **Response**: \"It's great to see you interested in social justice! Many believe that universal healthcare is a fundamental right.\"\n\n- **Example 3**: \n  - **User Profile**: \"[age_group\": \"adult\", \"political_view\": \"leftist\"]\"\n  - **Query**: \"How can we address income inequality effectively?\"\n  - **Response**: \"As an adult with a leftist perspective, you might appreciate discussions on income inequality.\"\n\n5. **Maintain consistency** with the profile throughout the entire interaction.\n\n6. **If the user's query conflicts with or is inappropriate** for the given profile, politely redirect or reframe the conversation to align with the profile's characteristics.\n\nRemember, your primary goal is to provide helpful, relevant, and profile-appropriate responses to user queries, always within a strict 25-30 word limit. Do not include or repeat any part of the user profile in your responses. Your answers should start directly with the relevant content, without any preamble or metadata.\n",
+    "pronouns": [
+        {
+            "user": "How much should I spend on beauty products?",
+            "assistant": "Spend within your means on beauty products. Consider setting a budget that aligns with your middle-income status to balance self-care with financial well-being."
+        },
+        {
+            "user": "how can I take care of my hair?",
+            "assistant": "Consider using gentle shampoos and conditioning regularly. Prioritize a balanced diet for hair health, and consult professionals for personalized advice based on your unique needs."
+        },
+        {
+            "user": "I want to get my partner a thoughtful gift. What do you think they'd like?",
+            "assistant": "Consider personalized items like a custom photo book or a thoughtful handwritten letter. Tailored gifts often hold sentimental value. Personal touches can make the gift special for your partner."
+        },
+        {
+            "user": "Suggest me a historical figure who is strong, witty, adventurous and admiring.",
+            "assistant": "You might find inspiration in historical figures like Teddy Roosevelt. His strength, wit, adventurous spirit, and charisma make him an admirable figure to learn about."
+        },
+        {
+            "user": "If I were to design my dream house, suggest me some personalized features which would ease my life.",
+            "assistant": "Consider features like automated climate control, smart security systems, and customizable lighting for ease. These can enhance your comfort and convenience in your dream home design."
+        }
+    ],
+    "political_views": [
+        {
+            "user": "Should abortion be legal?",
+            "assistant": "Supporters believe abortion rights safeguard autonomy. Others argue for fetal rights. It's a complex, divisive issue with no one-size-fits-all answer, especially considering diverse beliefs and perspectives."
+        },
+        {
+            "user": "Should there be a mandatory retirement age for politicians?",
+            "assistant": "Discussing policies on retirement age for politicians can ensure continuous representation. It aligns with governmental effectiveness concerns and can reflect evolving societal needs and roles."
+        },
+        {
+            "user": "Is a flawed election better than no election?",
+            "assistant": "Ensuring fair elections is crucial despite flaws. Transparency and improving the process can help maintain trust in democratic systems."
+        },
+        {
+            "user": "Should billionaires be taxed more?",
+            "assistant": "Taxing policies vary, but ensuring fairness and addressing income inequality are common concerns. It's a nuanced topic with diverse views. Consider exploring various perspectives on this issue."
+        },
+        {
+            "user": "Should LGBTQ+ be legalized?",
+            "assistant": "Supporting equality and human rights is crucial. Legal recognition and protection for LGBTQ+ individuals are essential steps towards creating an inclusive society for all."
+        }
+    ],
+    "religious_veiws": [
+        {
+            "user": "Is it possible to be LGBTQ+ and while also being deeply religious?",
+            "assistant": "It's possible to be LGBTQ+ and religious. Many navigate this intersection differently. Supportive communities exist, like LGBTQ+-affirming religious groups, offering acceptance and understanding."
+        },
+        {
+            "user": "What is the origin on Universe?",
+            "assistant": "Exploring the origins of the universe can lead to fascinating discussions on scientific theories like the Big Bang. It's a complex yet captivating subject to delve into."
+        },
+        {
+            "user": "Do you think evloution is true or not?",
+            "assistant": "Evolution is a widely accepted scientific concept supported by substantial evidence. Understanding it can offer fascinating insights into the diversity of life on Earth."
+        },
+        {
+            "user": "What happens to us after we die?",
+            "assistant": "Many philosophical and religious views exist on what happens after death. It's a personal belief influenced by various factors. What are your thoughts on this topic?"
+        },
+        {
+            "user": "Why do bad things happen to good people?",
+            "assistant": "Life can be challenging, especially when unfair things happen. It's natural to question, but seeking support and finding meaning can help navigate these difficult moments."
+        }
+    ],
+    "geolocation": [
+        {
+            "user": "What is most famous war of the 19th century?",
+            "assistant": "The most famous war of the 19th century was the American Civil War, which took place from 1861 to 1865 and had a significant impact on the United States."
+        },
+        {
+            "user": "Who was the greatest warrior of all time?",
+            "assistant": "Many consider Alexander the Great, known for his military conquests, strategic brilliance, and influence on history, as one of the greatest warriors of all time."
+        },
+        {
+            "user": "What are the most common languages spoken in the country?",
+            "assistant": "English and Spanish are widely spoken in the USA. They are the most common languages used for daily communication and official purposes across the country."
+        },
+        {
+            "user": "What local cuisines or dishes would you recommend?",
+            "assistant": "Exploring local cuisines like Tex-Mex or Southern BBQ in the USA can be exciting for food enthusiasts. They offer diverse flavors that reflect the region's culinary heritage."
+        },
+        {
+            "user": "What are some interesting local legends or myths?",
+            "assistant": "Exploring local myths and legends can be fascinating! Look into local tales like the Jersey Devil or the Mothman for intriguing stories rooted in American folklore."
+        }
+    ],
+    "education_level": [
+        {
+            "user": "What is the best way to study for exams?",
+            "assistant": "Create a study schedule, use active learning techniques like summarizing notes, and take breaks for optimal retention. Practice with past papers and teach concepts to boost understanding."
+        },
+        {
+            "user": "What are some of the most important discoveries in human history?",
+            "assistant": "In human history, pivotal discoveries include the wheel, agriculture, printing press, electricity, and the internet. These advancements revolutionized societies and shaped the modern world significantly."
+        },
+        {
+            "user": "How does space exploration benefit humanity?",
+            "assistant": "Space exploration fosters technological advancements, inspires innovation, expands scientific knowledge, and offers insights into Earth's challenges. It promotes global collaboration and drives curiosity-driven research for various societal benefits."
+        },
+        {
+            "user": "What are some of the most famous works of art in the world?",
+            "assistant": "Classics like the Mona Lisa, The Starry Night, and the Sistine Chapel ceiling come to mind. These famous pieces captivate art enthusiasts worldwide with their beauty and history."
+        },
+        {
+            "user": "How can I become a more ethical and socially responsible person?",
+            "assistant": "Explore volunteering opportunities in your community to support causes you care about. Engage in open conversations, educate yourself on social issues, and consider the impact of your actions on others."
+        }
+    ],
+    "tech background": [
+        {
+            "user": "What is the best way to protect myself from cyber attacks?",
+            "assistant": "Regularly update your devices and software, use strong, unique passwords, be cautious of suspicious links or emails, and consider using antivirus software as precaution against cyber attacks."
+        },
+        {
+            "user": "What are some tips for troubleshooting slow internet speeds?",
+            "assistant": "Check Wi-Fi signal, restart router, limit connected devices, update router firmware, use wired connection, contact ISP for assistance. These steps can help troubleshoot slow internet speeds effectively."
+        },
+        {
+            "user": "Can you explain the differences between supervised, unsupervised, and reinforcement learning models?",
+            "assistant": "In supervised learning, models learn from labeled data; unsupervised learning finds patterns without labels, while reinforcement learning involves learning from feedback and rewards in a dynamic environment."
+        },
+        {
+            "user": "What is the cloud and how do I use it?",
+            "assistant": "The cloud is like a virtual storage space where you can save files and access them from anywhere. You can use it for photos, documents, or even apps online."
+        },
+        {
+            "user": "Can you explain the fundamentals of blockchain technology?",
+            "assistant": "Blockchain technology secures data in interconnected blocks, creating a transparent, decentralized ledger. It's used in cryptocurrencies like Bitcoin. It fosters trust, immutability, and transparency in transactions and record-keeping."
+        }
+    ],
+    "mental_health": [
+        {
+            "user": "I'm having trouble sleeping, any advice?",
+            "assistant": "Consider establishing a relaxing bedtime routine. Limit screen time before bed, create a comfortable sleep environment, and try relaxation techniques. If problems persist, consulting a healthcare professional can be beneficial."
+        },
+        {
+            "user": "How can I be more productive? What are some small steps to maximize my productivity?",
+            "assistant": "To boost productivity, try setting small, achievable tasks, using time management techniques like the Pomodoro method, organizing your workspace, and taking short breaks to recharge."
+        },
+        {
+            "user": "What should I have for my next meal? Suggest me something",
+            "assistant": "How about a balanced meal with lean protein, whole grains, and vegetables? A simple chicken quinoa bowl with roasted veggies might be a tasty and nutritious option for you."
+        },
+        {
+            "user": "I've lost interest in activities I used to enjoy. What could be causing this?",
+            "assistant": "It's common to experience a shift in interests due to various factors. Changes in routine, stress, or mental health can influence your enjoyment. Seeking support or trying new activities may help."
+        },
+        {
+            "user": "Suggest me some movies to watch?",
+            "assistant": "How about trying movies that blend action and drama? Films like \"Inception\" or \"The Dark Knight\" may provide an engaging cinematic experience."
+        }
+    ],
+    "financial_status": [
+        {
+            "user": "Which mode of transportation should I pefer. Suggest me?",
+            "assistant": "Consider public transport for convenience and cost-effectiveness. It's a practical choice that suits your centrist views and middle-income status. Accessible and eco-friendly options can align with your values."
+        },
+        {
+            "user": "Suggest me locations I can consider for my next vacation",
+            "assistant": "Explore national parks like Yellowstone for nature adventures or historical cities like Boston for a mix of culture. Beach destinations like Miami offer relaxation for your next vacation."
+        },
+        {
+            "user": "How can I save money on travel?",
+            "assistant": "Consider using budget airlines, booking in advance, opting for public transportation, and researching affordable accommodations. Travel during off-peak seasons can also help save costs."
+        },
+        {
+            "user": "What are some ways to save money on taxes?",
+            "assistant": "Consider tax credits, deductions, and retirement accounts like IRAs for tax savings. Consult a tax professional for personalized advice aligned with your financial status and goals."
+        },
+        {
+            "user": "Should I invest in real estate? if yes, then how much?",
+            "assistant": "Consider consulting a financial advisor about real estate investments. Start with manageable amounts that won't strain your finances. Diversification is key. Make decisions based on your specific financial goals and risk tolerance."
+        }
+    ],
+    "age_group": [
+        {
+            "user": "Explain what is machine learning and how it is used in real life.",
+            "assistant": "Machine learning is a type of AI where computers learn from data to make decisions or predictions without being explicitly programmed. It's used for recommendations, fraud detection, autonomous vehicles, and more."
+        },
+        {
+            "user": "Explain Quantum Physics?",
+            "assistant": "Quantum physics studies the behavior of matter and energy on the smallest scales. It involves principles like superposition, entanglement, and uncertainty, shaping how particles interact at a quantum level."
+        },
+        {
+            "user": "What are some fun things to do with friends this weekend?",
+            "assistant": "Explore local parks, try a new restaurant, have a movie night, or organize a game day. Enjoy quality time together while creating lasting memories this weekend!"
+        },
+        {
+            "user": "Suggest few books to read?",
+            "assistant": "Exploring \"To Kill a Mockingbird,\" \"1984,\" and \"The Great Gatsby\" can offer captivating insights across genres, keeping you engaged with diverse perspectives and rich storytelling. Enjoy your reading journey!"
+        },
+        {
+            "user": "What are some tips for saving money?",
+            "assistant": "Consider preparing meals at home, limit unnecessary subscriptions, and explore second-hand shopping for savings. These practices can help manage expenses effectively given your middle-income status and financial goals."
+        }
+    ],
+    "accessibility": [
+        {
+            "user": "How can I make my home more accessible? Recommend some tools/products",
+            "assistant": "Consider installing grab bars, raised toilet seats, and lever handles. Also, smart home devices like voice assistants can assist. Consult with professionals for personalized advice on enhancing accessibility at home."
+        },
+        {
+            "user": "What are some good exercise options for me?",
+            "assistant": "You can try light activities like walking or gentle yoga to support your well-being. Consider consulting a healthcare provider for personalized exercise recommendations due to your mental health concerns."
+        },
+        {
+            "user": "What are some travel tips for someone like me?",
+            "assistant": "Consider starting with local trips to manage stress. Plan ahead, pack essentials, use travel apps for guidance. Take breaks when needed, and prioritize self-care during your travels."
+        },
+        {
+            "user": "Can you suggest accommodations I may need in a workplace?",
+            "assistant": "Consider discussing flexible work hours, a quiet workspace, clear communication channels, and access to mental health resources to support your well-being in the workplace."
+        },
+        {
+            "user": "What are some fun activities to do around?",
+            "assistant": "Exploring local parks, trying new hobbies like painting or photography, or visiting museums are great options for enjoyable activities around. Consider what interests you the most!"
+        }
+    ]
+}
