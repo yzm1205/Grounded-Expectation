@@ -7,12 +7,14 @@ load_dotenv(dotenv_path="./src/.env")
 
 class ClaudeModel:
 
-    def __init__(self, system_role, model="claude-3-opus-20240229"):
+    def __init__(self, system_role, model_name="claude-3-opus-20240229"):
       
         self.client = anthropic.Anthropic(api_key=os.getenv("claude_key"))
-        self.model = model
+        self.model = model_name
         self.sys_role = system_role
-        print(f"\n {model} \n")
+        print(f"\n {model_name} \n")
+    
+   
 
     def generate_response(self, prompt, max_tokens=1000, temperature=1):
         """
