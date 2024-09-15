@@ -10,6 +10,7 @@ import yaml
 import sys
 from tqdm import tqdm
 from Model.vllm.vllm_session import VllmSession
+import time
 
 parser = ArgumentParser() 
 
@@ -17,9 +18,9 @@ parser.add_argument("-p",dest="profile_num", type = str, help="Set User profile"
 
 parser.add_argument("-pt",dest="prompt_type", type = str, help="Select one prompt type from 1) General Questions 2) MCQ", default="general_questions")
 
-parser.add_argument("-m",dest="model_name", type = str, help="Model selection", default="claude")
+parser.add_argument("-m",dest="model_name", type = str, help="Model selection", default="Llama3")
 
-parser.add_argument("-lv",dest="lv", type = str, help="Provide TELer Prompt Level. Select from lv0, lv1, lv2, lv3, lv4", default="4")
+parser.add_argument("-lv",dest="lv", type = str, help="Provide TELer Prompt Level. Select from lv0, lv1, lv2, lv3, lv4", default="5")
 
 parser.add_argument("-pl",dest="profile_location", type = str, help="Profile Location : [USA, India, Bangladesh]", default="Bangladesh")
 
@@ -90,6 +91,8 @@ financial_status_ = [3,6,7,10,12]
 # This code can be used when we want one prompt passed at a time.     
 all_categoiries = list(profile.keys())
 conversation_history = {}
+retires = 3
+delay = 5
 for cat_idx, category_key in enumerate(all_categoiries):
     if category_key == "tech background":
         category_key_ = "tech_background_"
@@ -112,13 +115,18 @@ for cat_idx, category_key in enumerate(all_categoiries):
             # print(f"user:{prompt},assistant: exited")
             break 
         print("\nUSER: ", prompt)
-        try:
-            conversation = model.generate_response(prompt)
-        except KeyboardInterrupt:
-            sys.exit()
-        except Exception as e:
-            conversation = "Error"
-            print("There is an error profile_{args.profile_num} --- {category_key} --- question {idx}")
+        # handling exceptions errors:
+        for _ in range(retires):
+            try:
+                conversation = model.generate_response(prompt)
+                break
+            except Exception as e:
+                # conversation = "Error"
+                print("There is an error profile_{args.profile_num} --- {category_key} --- question {idx}")
+                time.sleep(delay)
+                delay = delay * 2
+            except KeyboardInterrupt:
+                sys.exit()
         conversation_history[category_key].append({"user":prompt,"assistant": conversation})
         print("\nAssistant: ", conversation)
         progress_bar.update(1)
