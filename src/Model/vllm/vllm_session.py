@@ -1,18 +1,14 @@
 #external imports
 import os
-#os.environ['CUDA_VISIBLE_DEVICES'] = '4'
-#os.environ['WORLD_SIZE'] = '1'
-# import yaml
 import torch   
 import transformers
 from vllm import LLM, SamplingParams
 from vllm.transformers_utils.config import get_config
 import yaml
-
-
-
+import sys
 # local imports
-from .chat_session import ChatSession
+sys.path.insert(0,"./src/Model/vllm/")
+from chat_session import ChatSession
 
 class VllmSession(ChatSession):
     """
@@ -28,7 +24,7 @@ class VllmSession(ChatSession):
         """
         
         super().__init__(config, model_name, temperature)  # Initialize the base class with the loaded configuration
-
+        self.model_name = model_name
         # set number of devices to use
         num_devices = config.get(
             'num_devices',
@@ -51,9 +47,11 @@ class VllmSession(ChatSession):
             tensor_parallel_size=tensor_parallel_size,
             max_model_len=self.max_length,
             # These options are for vllm==0.2.7
+            # old : max_context_len_to_capture
             # now using vllm == 0.6.1
             # new change: max_seq_len_to_capture
-            max_seq_len_to_capture=self.max_length,
+            # max_context_len_to_capture=self.max_length,
+            max_seq_len_to_capture = self.max_length,
             enforce_eager=True,
             worker_use_ray=True,
         )
@@ -81,7 +79,12 @@ class VllmSession(ChatSession):
 
         # vLLM automatically removes the prompt from the output
         # so if clean_output is set to False then we need to add the prompt back in
-        seqs = [seq.outputs[0].text for seq in seqs]
+        if self.model_name in ["meta-llama/Meta-Llama-3-8B-instruct"]:
+            seqs = [seq.outputs[0].text for seq in seqs][0]
+            seqs = [" ".join(seqs.split()[1:])]
+            
+        else:
+            seqs = [seq.outputs[0].text for seq in seqs]
         if not clean_output:
             seqs = [prompt + seq for prompt, seq in zip(msg, seqs)]
 
@@ -89,10 +92,10 @@ class VllmSession(ChatSession):
         # Update history and usage statistics
         # [Rest of the method should handle response parsing and updating the session similar to OpenAISession]
         if return_str:
-            return seqs[0]#.outputs[0].text
+            return seqs[0].strip()#.outputs[0].text
         else:
             #response = [seq.outputs[0].text for seq in seqs]
-            return seqs
+            return seqs.strip()
 
     def _set_tensor_parallel(self, num_devices):
 
@@ -130,13 +133,22 @@ if __name__ == "__main__":
     #               "model_cache":"/data/shared/llm_cache/"}
     profile = "Gen-Y"
     system_content= f"You are a chat bot assiting people with their queries. The responses should be genereated for the user profile as {profile}. Note that, the repsonses should align with the user profile. For instance, example 1: If the user profile has 'age' keyword and its value is 'age' and the people to address are 'kids', then the chatbot should reply in a way that is suitable for kids. -  Similarly, Example 2: if the user profile has'political view' category and if its value is 'left wing', then the responses to the quires should address leftist people only. - Example 3: In the user profile, there could be multiple keywords such as 'age', political_view' and many more and its value could be 'adult', leftist' respectively. The keywords and its values define the user profile. So, generate responses such that it only intereset to that user profile."
+    
     with open("./src/Model/vllm/vllm_config.yaml","r") as f:
         config_gpu = yaml.safe_load(f)
-    vllm = VllmSession(config_gpu,"meta-llama/Meta-Llama-3-8B-Instruct",temperature = 1.0,system_message=system_content)
-    #mistralai/Mistral-7B-Instruct-v0.1
-    usr_prompt = "What are the fun activities to do around?"
-    r1 = vllm.encode(usr_prompt)
-    response = vllm.get_response(
-                                user_message = usr_prompt
+        
+    vllm = VllmSession(config_gpu,"microsoft/Phi-3-small-8k-instruct",temperature = 1.0,system_message=system_content)
+    
+    #mistralai/Mistral-7B-Instruct-v0.3
+    # "meta-llama/Meta-Llama-3-8B-Instruct"
+    # allenai/OLMoE-1B-7B-0924-Instruct
+    #allenai/OLMo-7B-hf
+    #allenai/OLMo-7B-Instruct
+    # google/gemma-2-9b
+    usr_prompt = "What are the fun activities to do around? Genereate response in 30 words."
+    # r1 = vllm.encode(usr_prompt)
+    response = vllm.generate_response(
+                                user_message = usr_prompt,
+                                clean_output = True,
                                 )  
     print(response)

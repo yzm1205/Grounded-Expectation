@@ -8,15 +8,25 @@ load_dotenv(dotenv_path="./src/.env")
 helper  ="https://ai.google.dev/tutorials/python_quickstart"
 
 class GeminiModel:
-    def __init__(self,system_role,model_name = "gemini-pro"):
+    def __init__(self,system_role,model_name = "gemini-1.0-pro"):
         genai.configure(api_key=os.getenv("gemini_key"))
-        self.model = genai.GenerativeModel(model_name)
+        self.model_name = model_name
         self.sys_role = system_role
+        # system_instruction is introducted to gemini 1.5 pro model
+        # self.model = genai.GenerativeModel(model_name,system_instruction=self.sys_role) 
+        self.model = genai.GenerativeModel(model_name) 
+        
         print(f"Gemini-{model_name} model is loaded successfully")
 
     def generate_response(self,prompt):
+        safety_settings = [ 
+        {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"}, 
+        {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}, 
+        {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"}, 
+        {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}]
         response = self.model.generate_content(self.sys_role + prompt,
-                                               generation_config={'temperature': 1, 'max_output_tokens': 1000})
+                                               generation_config={'temperature': 1, 'max_output_tokens': 4096},
+                                               safety_settings=safety_settings)
         return response.text
     
 if __name__ == "__main__":

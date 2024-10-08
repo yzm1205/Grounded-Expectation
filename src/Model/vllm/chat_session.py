@@ -182,9 +182,32 @@ class ChatSession:
                 msg = 'Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n' + msg
 
             return msg
-        elif self.model_name == 'mistralai/Mistral-7B-Instruct-v0.1':
+        elif self.model_name in ['mistralai/Mistral-7B-Instruct-v0.1','mistralai/Mistral-7B-Instruct-v0.3']:
             msg = f'[INST] {usr_msg} [/INST]'
             return msg 
+        
+        elif self.model_name in  ['allenai/OLMo-7B-0724-Instruct-hf',"allenai/OLMoE-1B-7B-0924-Instruct"]:
+            msg = f'<|user|> \n {usr_msg} <||>'
+            if sys_msg is not None:
+                msg = f"<|system|> \n + {sys_msg} + \n<|user|>\n {usr_msg}"
+            
+            return msg 
+        elif self.model_name in ["microsoft/Phi-3-small-8k-instruct"]:
+            msg = f"<|endoftext|><|user|>\n{usr_msg} <|end|>\n<|assistant|>"
+            if sys_msg is not None:
+                msg = f"<|endoftext|><|assistant|>\n{sys_msg} <|end|>\n" + msg
+            return msg
+            
+        elif self.model_name in  ["meta-llama/Meta-Llama-3-8B-Instruct","meta-llama/Meta-Llama-3-8B-instruct"]:
+            #'<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nYou are a pirate chatbot who always responds in pirate speak!<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nWho are you?<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+            msg = f'<|start_header_id|>user<|end_header_id|>\n\n{usr_msg}<|eot_id|>'
+            if sys_msg is not None:
+                msg = f'<|start_header_id|>system<|end_header_id|>\n\n{sys_msg}<|eot_id|>\n\n{msg}'
+            return msg
+            
+        elif self.model_name == "gemma-2-9b":
+            pass
+        
         elif 'lmsys/vicuna' in self.model_name:
             msg = f'USER: {usr_msg.strip()}\nASSISTANT: '
             if sys_msg is not None:

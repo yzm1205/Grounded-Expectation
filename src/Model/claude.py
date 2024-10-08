@@ -10,7 +10,7 @@ class ClaudeModel:
     def __init__(self, system_role, model_name="claude-3-opus-20240229"):
       
         self.client = anthropic.Anthropic(api_key=os.getenv("claude_key"))
-        self.model = model_name
+        self.model_name = model_name
         self.sys_role = system_role
         print(f"\n {model_name} \n")
     
@@ -29,7 +29,7 @@ class ClaudeModel:
             list: A list of generated responses.
         """
         response = self.client.messages.create(
-            model=self.model,
+            model=self.model_name,
             max_tokens=max_tokens,
             temperature=temperature,
             system=self.sys_role,

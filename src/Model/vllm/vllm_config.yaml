@@ -2,3 +2,10 @@ batch_size:
   default: 1
 
 model_cache: /data/shared/llm_cache/
+max_length: 2048
+
+device: cuda
+
+llama_path: /data/shared/llama3-instruct/Meta-Llama-3-8B-Instruct_shard_size_2GB
+mistral_path: /data/shared/mistralv3/Mistral-7B-Instruct-v0.3_shard_size_2GB
+olmo_path: /data/shared/olmo/OLMo-7B_shard_size_1GB 

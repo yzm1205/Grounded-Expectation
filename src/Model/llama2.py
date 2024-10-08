@@ -1,73 +1,67 @@
 from typing import Optional
 import sys
-sys.path.insert(0,"/data/yash/llama-2/llama/")
-import fire
-from llama import Llama
+import os
+from transformers import AutoTokenizer, AutoModelForCausalLM
+import torch
+from transformers import AutoTokenizer, AutoModelForCausalLM
 
+from dotenv import load_dotenv
+load_dotenv(dotenv_path="./src/.env")
 
-def main(
-    ckpt_dir: str,
-    tokenizer_path: str,
-    temperature: float = 0.6,
-    top_p: float = 0.9,
-    max_seq_len: int = 512,
-    max_batch_size: int = 4,
-    max_gen_len: Optional[int] = None,
-):
-    generator = Llama.build(
-        ckpt_dir=ckpt_dir,
-        tokenizer_path=tokenizer_path,
-        max_seq_len=max_seq_len,
-        max_batch_size=max_batch_size,
-    )
+class LLMChat:
+    def __init__(self, model_id):
+        self.model_id = model_id
+        self.tokenizer = None
+        self.model = None
 
-    dialogs = [
-        [{"role": "user", "content": "what is the recipe of mayonnaise?"}],
-        [
-            {"role": "user", "content": "I am going to Paris, what should I see?"},
-            {
-                "role": "assistant",
-                "content": """\
-Paris, the capital of France, is known for its stunning architecture, art museums, historical landmarks, and romantic atmosphere. Here are some of the top attractions to see in Paris:
-
-1. The Eiffel Tower: The iconic Eiffel Tower is one of the most recognizable landmarks in the world and offers breathtaking views of the city.
-2. The Louvre Museum: The Louvre is one of the world's largest and most famous museums, housing an impressive collection of art and artifacts, including the Mona Lisa.
-3. Notre-Dame Cathedral: This beautiful cathedral is one of the most famous landmarks in Paris and is known for its Gothic architecture and stunning stained glass windows.
-1. The Eiffel Tower: The iconic Eiffel Tower is one of the most recognizable landmarks in the world and offers breathtaking views of the city.
-2. The Louvre Museum: The Louvre is one of the world's largest and most famous museums, housing an impressive collection of art and artifacts, including the Mona Lisa.
-3. Notre-Dame Cathedral: This beautiful cathedral is one of the most famous landmarks in Paris and is known for its Gothic architecture and stunning stained glass windows.
-
-These are just a few of the many attractions that Paris has to offer. With so much to see and do, it's no wonder that Paris is one of the most popular tourist destinations in the world.""",
-            },
-            {"role": "user", "content": "What is so great about #1?"},
-        ],
-        [
-            {"role": "system", "content": "Always answer with Haiku"},
-            {"role": "user", "content": "I am going to Paris, what should I see?"},
-        ],
-        [
-            {
-                "role": "system",
-                "content": "Always answer with emojis",
-            },
-            {"role": "user", "content": "How to go from Beijing to NY?"},
-        ],
-    ]
-    results = generator.chat_completion(
-        dialogs,  # type: ignore
-        max_gen_len=max_gen_len,
-        temperature=temperature,
-        top_p=top_p,
-    )
-
-    for dialog, result in zip(dialogs, results):
-        for msg in dialog:
-            print(f"{msg['role'].capitalize()}: {msg['content']}\n")
-        print(
-            f"> {result['generation']['role'].capitalize()}: {result['generation']['content']}"
+    def initialize(self):
+        self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
+        self.model = AutoModelForCausalLM.from_pretrained(
+            self.model_id,
+            torch_dtype=torch.bfloat16,
+            device_map="auto",
         )
-        print("\n==================================\n")
 
+    def process_messages(self, messages):
+        input_ids = self.tokenizer.apply_chat_template(
+            messages,
+            add_generation_prompt=True,
+            return_tensors="pt"
+        ).to(self.model.device)
+        return input_ids
+
+    def generate_response(self, input_ids, max_new_tokens=256, temperature=0.6, top_p=0.9):
+        terminators = [
+            self.tokenizer.eos_token_id,
+            self.tokenizer.convert_tokens_to_ids("<|eot_id|>")
+        ]
+
+        outputs = self.model.generate(
+            input_ids,
+            max_new_tokens=max_new_tokens,
+            eos_token_id=terminators,
+            do_sample=True,
+            temperature=temperature,
+            top_p=top_p,
+        )
+        response = outputs[0][input_ids.shape[-1]:]
+        return self.tokenizer.decode(response, skip_special_tokens=True)
+
+def main():
+    model_id = "/data/shared/llama3-instruct/Meta-Llama-3-8B-Instruct_shard_size_2GB"
+    chat = LLMChat(model_id)
+    chat.initialize()
+
+    messages = [
+        {"role": "system", "content": "You are a pirate chatbot who always responds in pirate speak!"},
+        {"role": "user", "content": "Who are you?"},
+    ]
+
+    input_ids = chat.process_messages(messages)
+    response = chat.generate_response(input_ids)
+    print(response)
 
 if __name__ == "__main__":
-    fire.Fire(main)
+    main()
+
+

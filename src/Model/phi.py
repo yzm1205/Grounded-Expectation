@@ -1,5 +1,5 @@
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 torch.random.manual_seed(0)
 
