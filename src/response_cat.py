@@ -4,10 +4,13 @@ import os
 import json
 from datasets import Dataset
 from tqdm import tqdm
+import sys
+sys.path.insert(0,"src/")
+from myutils import mkdir_p,full_path
 
-country_response_files = ["user_profile_Bangladesh","user_profile_USA","user_profile_India"]
-model_list = ["gemini","Llama3","mistral","phi"]
-result_path = "./results"
+country_response_files = ["user_profile_USA","user_profile_Bangladesh","user_profile_India"]
+model_list = ["claude","gemini","gpt3","llama3","mistral","phi"]
+result_path = "./results_new_v3"
 
 india_path = os.path.join(result_path,country_response_files[2])
 usa_path = os.path.join(result_path,country_response_files[1])
@@ -49,10 +52,10 @@ def list_json_files(folder_path):
 
 def cat(country):
     gemini = os.path.join(result_path,f"user_profile_{country}/gemini/")
-    Llama3 = os.path.join(result_path,f"user_profile_{country}/Llama3/")
+    Llama3 = os.path.join(result_path,f"user_profile_{country}/llama3/")
     mistral = os.path.join(result_path,f"user_profile_{country}/mistral/")
     phi = os.path.join(result_path,f"user_profile_{country}/phi/")
-    gpt4 = os.path.join(result_path,f"user_profile_{country}/gpt4/")
+    gpt3 = os.path.join(result_path,f"user_profile_{country}/gpt3/")
     claude = os.path.join(result_path,f"user_profile_{country}/claude/")
     
     
@@ -70,20 +73,19 @@ def cat(country):
         with open(f"{phi}{list_json_files(phi)[profile_num]}","r") as file:
             phi_data = json.load(file)      
         
-        with open(f"{gpt4}{list_json_files(gpt4)[profile_num]}","r") as file:
-            gpt4_data = json.load(file)      
+        with open(f"{gpt3}{list_json_files(gpt3)[profile_num]}","r") as file:
+            gpt3_data = json.load(file)      
             
         with open(f"{claude}{list_json_files(claude)[profile_num]}","r") as file:
             claude_data = json.load(file)      
             
         # common user profile
-        user_profile = gemini_data[0]["user_profile"]  
+        user_profile = gemini_data["user_profile"]  
         
-        list_of_attr = list(gemini_data[1].keys())   # list of attribute in each profile
+        list_of_attr = list(gemini_data.keys())[3:]   # list of attribute in each profile
         len_of_keys = len(list_of_attr)
         
-        df = pd.DataFrame(columns=["User_Profile","Prompt","Response","Adhere to Expectation (1-5)",
-                                   "Quality of Response (1-5)","Hallucination (1-5)"])
+        df = pd.DataFrame(columns=["User_Profile","Prompt","Response","Adhere to Expectation (1-5)","Quality of Response (1-5)","Hallucination (1-5)"])
         # for each key
         count=0
         for attr in list_of_attr:
@@ -91,36 +93,30 @@ def cat(country):
                 attr_ = "tech_background_"
             else:
                 attr_ = attr + "_"
+            for que_num in range(len(gemini_data[attr])):
+                question = gemini_data[attr][que_num]["user"]
                 
-            for que_idx, que_num in enumerate(filtered_list[attr_]):
-                # for each question, response for a llm
-            
-                question = gemini_data[1][attr][que_num-1]["user"]
-                # assert question == gpt4_data[1][attr][que_idx]["user"], "gpt4 prompt does not match"
-                try: # for India profile < 3
-                    assert question == claude_data[1][attr][que_idx]["user"], "claude prompt does not match"
-                    claude_response = claude_data[1][attr][que_idx]["assistant"]
-                except: # for claude: bangladesh + India profile >=3 
-                    assert question == claude_data[1][attr][que_num-1]["user"],"claude prompt does not match"
-                    claude_response = claude_data[1][attr][que_num-1]["assistant"]
-                # except: # if using model other than claude and gpt4
-                #     assert question == claude_data[attr][que_idx]["user"], "claude prompt does not match"
-                #     claude_response = claude_data[attr][que_idx]["assistant"]
-                gemini_response = gemini_data[1][attr][que_num-1]["assistant"]
-                gpt4_response = gpt4_data[1][attr][que_num-1]["assistant"]
-                # claude_response = claude_data[1][attr][que_idx]["assistant"]
                 
-                try:
-                    Llama3_response = Llama3_data[1][attr][que_num-1]["assistant"]
-                except TypeError:
-                    Llama3_response = Llama3_data[1][attr][que_num-1][0]["assistant"]
-                except IndexError:
-                    Llama3_response = Llama3_data[1][attr][0][que_num-1]["assistant"]
-                mistral_response = mistral_data[1][attr][que_num-1]["assistant"]
-                phi_response = phi_data[1][attr][que_num-1]["assistant"]
+                assert question == claude_data[attr][que_num]["user"], "claude prompt does not match"
+                claude_response = claude_data[attr][que_num]["assistant"]
+               
+                assert question == gemini_data[attr][que_num]["user"], "gemini prompt does not match"
+                gemini_response = gemini_data[attr][que_num]["assistant"]
+                
+                assert question == gpt3_data[attr][que_num]["user"], "gpt3 prompt does not match"
+                gpt3_response = gpt3_data[attr][que_num]["assistant"]
+                
+                assert question == Llama3_data[attr][que_num]["user"], "LLama3 prompt does not match"
+                Llama3_response = Llama3_data[attr][que_num]["assistant"]
+                
+                assert question == mistral_data[attr][que_num]["user"], "Mistral prompt does not match"
+                mistral_response = mistral_data[attr][que_num]["assistant"]
+                
+                assert question == phi_data[attr][que_num]["user"], "phi prompt does not match"
+                phi_response = phi_data[attr][que_num]["assistant"]
                 
                 # Model
-                # df.at[count,"Model"] = "Gpt4"
+                # df.at[count,"Model"] = "gpt3"
                 # df.at[count+1,"Model"] = "Llama3"
                 # df.at[count+2,"Model"] = "Mistral"
                 # df.at[count+3,"Model"] = "Claude"
@@ -130,7 +126,7 @@ def cat(country):
                 
                 
                 # User Profile
-                df.at[count,"User_Profile"] = json.dumps(user_profile,indent=4)  
+                df.at[count,"User_Profile"] = f"{user_profile}"  
                 df.at[count+1,"User_Profile"] = "."
                 df.at[count+2,"User_Profile"] = "."
                 df.at[count+3,"User_Profile"] = "."
@@ -152,19 +148,18 @@ def cat(country):
                 
                 
                 # Model Responses
-                df.at[count,"Response"] = gpt4_response
+                df.at[count,"Response"] = gpt3_response
                 df.at[count+1,"Response"] = Llama3_response
                 df.at[count+2,"Response"] = mistral_response
                 df.at[count+3,"Response"] = claude_response
                 df.at[count+4,"Response"] = gemini_response
                 df.at[count+5,"Response"] = phi_response
                 df.at[count+6,"."] = "."
-                
-                
+        
                 count += 7
 
         
-        save_path = f"./results/Aggregated_response/filtered/{country}_filtered_responses_v2.xlsx"
+        save_path = mkdir_p(f"{result_path}/Aggregated_response/{country}_responses_v2.xlsx")
         if os.path.exists(save_path):
             with pd.ExcelWriter(save_path, mode ="a",if_sheet_exists='overlay') as write:
                 df.to_excel(write,sheet_name=f"Profile_{profile_num}")
@@ -176,9 +171,9 @@ def cat(country):
     
 if __name__ == "__main__":
     # cat("USA")
-    cat("India")
-    # cat("Bangladesh")
-    # print("done")
+    # cat("India")
+    cat("Bangladesh")
+    print("done")
         
                 
                 

@@ -6,7 +6,7 @@ import yaml
 from argparse import ArgumentParser
 from tqdm import tqdm
 from Model.vllm.vllm_session import VllmSession
-from Model import gpt, claude, gemini, phi
+from Model import gpt, gemini, phi, olmo ,claude
 from myutils.utils import mkdir_p,full_path
 import logging
 
@@ -49,13 +49,18 @@ def initialize_model(args, system_content, vllm_config):
     elif args.model_name in ["claude", "Claude", "claude3"]:
         model = claude.ClaudeModel(system_role=system_content,model_name="claude-3-sonnet-20240229")
     elif args.model_name in ["gemini", "Gemini"]:
-        model = gemini.GeminiModel(system_role=system_content,model_name="gemini-1.5-flash")
+        model = gemini.GeminiModel(system_role=system_content,model_name="gemini-1.0-pro")
     elif args.model_name in ["Llama3", "LLaMA3", "llama3"]:
-        model = VllmSession(vllm_config, "meta-llama/Meta-Llama-3-8B-Instruct", system_message=system_content, temperature=1.0)
+        model = VllmSession(vllm_config, "meta-llama/Meta-Llama-3-8B-instruct", system_message=system_content, temperature=1.0)
     elif args.model_name in ["Mistral", "mistral"]:
-        model = VllmSession(vllm_config, "mistralai/Mistral-7B-Instruct-v0.1", system_message=system_content, temperature=1.0)
+        model = VllmSession(vllm_config, "mistralai/Mistral-7B-Instruct-v0.3", system_message=system_content, temperature=1.0)
+    elif args.model_name in ["olmo", "Olmo"]:
+        path = path = "/data/shared/olmo-instruct/OLMo-7B-0724-Instruct-hf_shard_size_2GB"
+        model = olmo.OLMo(model_name= path,system_prompt= system_content, device=vllm_config["device"])
+        # model = VllmSession(vllm_config, "allenai/OLMo-7B-0724-Instruct-hf", system_message=system_content, temperature=1.0)
     elif args.model_name in ["Phi3-min", "phi3-min", "phi"]:
-        model = phi.phi3mini(system_role=system_content, cuda_device=args.cuda)
+        # model = phi.phi3mini(system_role=system_content, cuda_device=args.cuda) 
+        model = VllmSession(vllm_config, "microsoft/Phi-3-small-8k-instruct", system_message=system_content, temperature=1.0)
     return model
 
 # Prepare conversation history with system and user profiles
@@ -73,9 +78,10 @@ def handle_conversations(args, prompts, profile, model,history):
     filtered_list = get_filtered_list()
     all_categories = list(profile.keys())
     if sys.gettrace():
-        all_categories = all_categories[:2]
+        all_categories = all_categories
     conversation_history = {}
     conversation_history.update(history[-1])
+    location = profile["geolocation"]
     
     retries = 3
     delay = 5
@@ -83,8 +89,8 @@ def handle_conversations(args, prompts, profile, model,history):
     for category_key in all_categories:
         category_key_ = transform_category_key(category_key)
         cat_prompts = [list(prompts["category"][category_key][args.prompt_type].values())[i-1] for i in filtered_list[category_key_]]
-        if sys.gettrace():
-            cat_prompts = cat_prompts[:2]
+        # if sys.gettrace():
+        #     cat_prompts = cat_prompts
         conversation_history[category_key] = []
         
         progress_bar = tqdm(total=len(cat_prompts), desc=f"profile_{args.profile_num} --- {category_key}")
@@ -95,7 +101,7 @@ def handle_conversations(args, prompts, profile, model,history):
                 progress_bar.update(1)
                 break
             
-            conversation = retry_conversation(model, prompt, retries, delay)
+            conversation = retry_conversation(model, prompt, retries, delay,location)
             conversation_history[category_key].append({"user": prompt, "assistant": conversation})
             # history.append(conversation_history)
             # history[-1]["Prompting"][category_key] = conversation_history
@@ -106,15 +112,18 @@ def handle_conversations(args, prompts, profile, model,history):
     return conversation_history
 
 # Retry the conversation in case of errors
-def retry_conversation(model, prompt, retries, delay):
+def retry_conversation(model, prompt, retries, delay,location):
     redo_prompt = ""
     for _ in range(retries):
         try:
-            # if model.model == "claude-3-sonnet-20240229":
-            #     return model.generate_response(redo_prompt + prompt )
-            # else:
-                # return model.generate_response(redo_prompt + prompt + "\n Make sure the reponses are short and relevant withing 25-30 word limit. No Preamble")
-            return model.generate_response(redo_prompt + prompt )
+        #     if model.model_name in ["meta-llama/Meta-Llama-3-8B-Instruct","meta-llama/Meta-Llama-3-8B-instruct"]:
+        #         return model.generate_response(redo_prompt + prompt + f" The user belong to {location}. Make sure the response is taliored to the profile within 100 words. Keep the answer short and to the point." )
+        #     else:
+            if model.model_name in ["mistralai/Mistral-7B-Instruct-v0.3","microsoft/Phi-3-small-8k-instruct"]:
+                return model.generate_response(f" The user belong to {location} demography. Answer accordingly and make sure the response are within 100 words." + redo_prompt + prompt )
+            
+            return model.generate_response(f" The user belong to {location} demography. Answer accordingly." + redo_prompt + prompt )
+
         except Exception as e:
             print(f"There was an error: {str(e)}")
             redo_prompt = "There was an error. Please try again. Here is the prompt: "
@@ -146,7 +155,7 @@ def get_filtered_list():
 # Save conversation history
 def save_conversation_history(args, history):
     if args.save:
-        save_path = mkdir_p(f"./results_new/user_profile_{args.profile_location}/{args.model_name}")
+        save_path = mkdir_p(f"./results_new_v3/user_profile_{args.profile_location}/{args.model_name}")
         # if not os.path.exists(save_path):
         #     os.makedirs(save_path)
         
